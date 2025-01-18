@@ -11,6 +11,10 @@ import Registration from "../Pages/Registration/Registration";
 import Dashboard from "../Layout/Dashboard";
 import UserHome from "../Pages/Dashboard/UserHome/UserHome";
 import PrivateRoute from "./PrivateRoute";
+import EditBio from "../Pages/Dashboard/EditBio/EditBio";
+import ViewBio from "../Pages/Dashboard/ViewBio/ViewBio";
+import MyContactRequests from "../Pages/Dashboard/MyContactRequests/MyContactRequests";
+import FavouritesBio from "../Pages/Dashboard/FavouriteBio/FavouritesBio";
 
 export const routes =  createBrowserRouter([
     {
@@ -52,8 +56,20 @@ export const routes =  createBrowserRouter([
                 element: <UserHome />
             },
             {
-                path: "",
-                element: ""
+                path: "edit-bio",
+                element: <EditBio />
+            },
+            {
+                path: "view-bio",
+                element: <ViewBio />
+            },
+            {
+                path: "my-contact-requests",
+                element: <MyContactRequests />
+            },
+            {
+                path: "favourites-bio",
+                element: <FavouritesBio />
             }
         ]
     }
