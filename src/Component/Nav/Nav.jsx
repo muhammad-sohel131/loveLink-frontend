@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import './Nav.css'
 import { GiLovers } from "react-icons/gi";
+import { AuthContext } from '../../Provider/AuthProvider';
 
 export default function Nav() {
+  const { user, logOut } = useContext(AuthContext)
+  const handleLogout = () => {
+    logOut()
+    .then(res => {
+      console.log(res)
+    })
+  }
   return (
     <header className='border-b border-[#e57339]'>
         <div className="section-container flex justify-between py-5">
@@ -15,8 +23,12 @@ export default function Nav() {
                 <li><NavLink to="/biodatas">Biodatas</NavLink></li>
                 <li><NavLink to="/about">About Us</NavLink></li>
                 <li><NavLink to="/contact">Contact Us</NavLink></li>
-                <li><NavLink to="/login">Login</NavLink></li>
-                <li><NavLink to="/dashboard/userHome">Dashboard</NavLink></li>
+                {
+                  user ? <>
+                    <li><NavLink to="/dashboard/userHome">Dashboard</NavLink></li> <li className='cursor-pointer' onClick={handleLogout}>Logout</li>
+                  </> : <li><NavLink to="/login">Login</NavLink></li>
+                }
+                
             </ul>
         </div>
     </header>

@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from "react-hook-form"
+import { AuthContext } from '../../Provider/AuthProvider';
+import { imageUpload } from '../../utils/imageUpload';
 
 export default function Registration() {
-    const { register, handleSubmit, watch, formState: {errors} } = useForm();
+    const { register, handleSubmit, formState: {errors} } = useForm();
+    const { createUser, updateUserProfile } = useContext(AuthContext)
+
     const onSubmit = (data) => {
-        console.log(data);
+        const image = data.image[0];
+        imageUpload(image)
+        .then(res => {
+            data.image = res.data.display_url;
+            console.log(data)
+            createUser(data.email, data.password)
+            .then(r => {
+                updateUserProfile(data.name, data.image)
+                .then(() => {
+                    console.log("created success")
+                })
+            })
+        })
+        .catch(err => console.log(err))
     }
     return (
         <>

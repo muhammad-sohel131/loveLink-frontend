@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from "react-hook-form"
+import { AuthContext } from '../../Provider/AuthProvider';
 
 export default function Login() {
-    const { register, handleSubmit, watch, formState: {errors} } = useForm();
+    const { register, handleSubmit, formState: {errors} } = useForm();
+    const { signIn, googleSignIn } = useContext(AuthContext)
     const onSubmit = (data) => {
-        console.log(data);
+        signIn(data.email, data.password)
+        .then(res => {
+            console.log(res)
+        })
+    }
+    const handleGoogleLogin = () => {
+        googleSignIn()
+        .then(res => {
+            console.log(res)
+        })
     }
     return (
         <>
@@ -21,7 +32,7 @@ export default function Login() {
                         <input className='rounded-lg border border-[#e57339] mb-5 p-2' type="password" placeholder='Password' {...register("password")} />
                         <input className='bg-[#e57339] text-white p-2 cursor-pointer rounded-lg ' type="submit" value="Login" />
 
-                        <button className='bg-[#000] text-[#e57339] my-5 p-2 cursor-pointer rounded-lg'>Login with Google</button>
+                        <button onClick={handleGoogleLogin} className='bg-[#000] text-[#e57339] my-5 p-2 cursor-pointer rounded-lg'>Login with Google</button>
                     </form>
                     
                 </div>
