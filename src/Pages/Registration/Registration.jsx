@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async'
 import { useForm } from "react-hook-form"
 import { AuthContext } from '../../Provider/AuthProvider';
 import { imageUpload } from '../../utils/imageUpload';
+import { toast } from 'react-toastify';
 
 export default function Registration() {
     const { register, handleSubmit, formState: {errors} } = useForm();
@@ -19,15 +20,19 @@ export default function Registration() {
                 updateUserProfile(data.name, data.image)
                 .then(() => {
                     console.log("created success")
+                    toast.success("Registration successful!")
                 })
             })
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            toast.error("Something Wrong! Please try later.")
+        })
     }
     return (
         <>
             <Helmet>
-                <title>Register</title>
+                <title>Register | LoveLink</title>
             </Helmet>
 
             <div className='section-container flex justify-around items-center'>

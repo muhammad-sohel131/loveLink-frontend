@@ -2,20 +2,37 @@ import React, { useContext } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from "react-hook-form"
 import { AuthContext } from '../../Provider/AuthProvider';
+import { toast } from 'react-toastify';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Login() {
     const { register, handleSubmit, formState: {errors} } = useForm();
     const { signIn, googleSignIn } = useContext(AuthContext)
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || '/';
+
     const onSubmit = (data) => {
         signIn(data.email, data.password)
         .then(res => {
             console.log(res)
+            toast.success("Login Successfull")
+            navigate(from, {replace: true})
+        })
+        .catch(err => {
+            console.log(err)
+            toast.error("Something Wrong! Please Try Again.")
         })
     }
     const handleGoogleLogin = () => {
         googleSignIn()
         .then(res => {
             console.log(res)
+            toast.success("Login Successful")
+        })
+        .catch(err => {
+            console.log(err)
+            toast.error("Something Wrong, please try again")
         })
     }
     return (

@@ -10,6 +10,7 @@ import Login from "../Pages/Login/Login";
 import Registration from "../Pages/Registration/Registration";
 import Dashboard from "../Layout/Dashboard";
 import UserHome from "../Pages/Dashboard/UserHome/UserHome";
+import PrivateRoute from "./PrivateRoute";
 
 export const routes =  createBrowserRouter([
     {
@@ -44,7 +45,7 @@ export const routes =  createBrowserRouter([
     },
     {
         path:"dashboard",
-        element: <Dashboard />,
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
         children: [
             {
                 path: "userHome",
