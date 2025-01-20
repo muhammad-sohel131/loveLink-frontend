@@ -12,7 +12,7 @@ import Dashboard from "../Layout/Dashboard";
 import UserHome from "../Pages/Dashboard/UserHome/UserHome";
 import PrivateRoute from "./PrivateRoute";
 import EditBio from "../Pages/Dashboard/EditBio/EditBio";
-import ViewBio from "../Pages/Dashboard/ViewBio/ViewBio";
+import ViewBiodata from "../Pages/Dashboard/ViewBioData/ViewBioData";
 import MyContactRequests from "../Pages/Dashboard/MyContactRequests/MyContactRequests";
 import FavouritesBio from "../Pages/Dashboard/FavouriteBio/FavouritesBio";
 
@@ -61,7 +61,7 @@ export const routes =  createBrowserRouter([
             },
             {
                 path: "view-bio",
-                element: <ViewBio />
+                element: <ViewBiodata />
             },
             {
                 path: "my-contact-requests",
