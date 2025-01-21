@@ -15,7 +15,11 @@ import EditBio from "../Pages/Dashboard/EditBio/EditBio";
 import ViewBiodata from "../Pages/Dashboard/ViewBioData/ViewBioData";
 import MyContactRequests from "../Pages/Dashboard/MyContactRequests/MyContactRequests";
 import FavouritesBio from "../Pages/Dashboard/FavouriteBio/FavouritesBio";
-
+import AdminRoute from "./AdminRoute";
+import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
+import ApprovedContact from "../Pages/Dashboard/ApprovedContact/ApprovedContact";
+import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
+import ApprovedPremium from "../Pages/Dashboard/ApprovedPremium/ApprovedPremium";
 export const routes =  createBrowserRouter([
     {
         path: "/",
@@ -70,6 +74,22 @@ export const routes =  createBrowserRouter([
             {
                 path: "favourites-bio",
                 element: <FavouritesBio />
+            },
+            {
+                path: "adminDashboard",
+                element: <AdminRoute><AdminDashboard /></AdminRoute>
+            },
+            {
+                path: "manage-users",
+                element: <AdminRoute><ManageUsers /></AdminRoute>
+            },
+            {
+                path: "approved-premium",
+                element: <AdminRoute><ApprovedPremium /></AdminRoute>
+            },
+            {
+                path: "approved-contact-requests",
+                element: <AdminRoute><ApprovedContact /></AdminRoute>
             }
         ]
     }

@@ -43,16 +43,22 @@ const ViewBiodata = () => {
     if (error) {
         console.log(error)
     }
-    console.log(biodata)
-    // Handle premium request
     const handleMakePremium = () => {
         setIsPremiumModalOpen(true);
     };
 
     // Confirm premium request
-    const confirmMakePremium = () => {
+    const confirmMakePremium = async () => {
         setIsPremiumModalOpen(false);
-        // Simulate sending request to the admin
+        
+        const bio = {
+            name : biodata.name,
+            email: user.email,
+            bio_id: biodata.bio_id,
+        }
+
+        const result = await axiosPublic.post("/premiumBios",bio);
+
         setTimeout(() => {
             alert("Your biodata has been sent for premium approval!");
             setIsPremium(true);
