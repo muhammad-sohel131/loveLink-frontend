@@ -19,7 +19,7 @@ export default function Slider() {
     scrollbar={{ draggable: true }}
     onSwiper={(swiper) => console.log(swiper)}
     onSlideChange={() => console.log('slide change')}
-    className='h-[400px]'
+    className='h-[300px]'
     >
       <SwiperSlide><img className='w-full' src="/couple-1.jpg" alt="" /></SwiperSlide>
       <SwiperSlide><img className='w-full' src='/couple-2.jpg' /></SwiperSlide>
