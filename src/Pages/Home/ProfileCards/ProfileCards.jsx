@@ -2,14 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../hooks/UseAxiosPublis";
-const profiles = [
-  { id: 1, type: "Male", image: "profile1.jpg", division: "Dhaka", age: 23, occupation: "Student" },
-  { id: 2, type: "Female", image: "profile2.jpg", division: "Chattagram", age: 45, occupation: "House wife" },
-  { id: 3, type: "Male", image: "profile3.jpg", division: "Rangpur", age: 30, occupation: "Job" },
-  { id: 4, type: "Female", image: "profile4.jpg", division: "Barisal", age: 28, occupation: "Student" },
-  { id: 5, type: "Male", image: "profile5.jpg", division: "Khulna", age: 35, occupation: "Job" },
-  { id: 6, type: "Female", image: "profile6.jpg", division: "Sylhet", age: 25, occupation: "House wife" },
-];
 
 const ProfileCards = () => {
   const [sortOrder, setSortOrder] = useState("ascending");
@@ -41,8 +33,8 @@ const ProfileCards = () => {
   };
 
   return (
-    <div className="p-8">
-      <div className="flex justify-between items-center mb-6">
+    <div className="section-container">
+      <div className="flex justify-between items-center my-10">
         <h2 className="text-2xl font-bold">Premium Members</h2>
         <select
           className="border p-2 rounded-md"
