@@ -54,7 +54,7 @@ const ManageUsers = () => {
                 <td className="border px-4 py-2">
                   <button
                     onClick={() => handleMakeAdmin(user.bio_id)}
-                    className="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600"
+                    className="bg-[#e57339] text-white px-4 py-1 rounded hover:bg-blue-600"
                   >
                     Make Admin
                   </button>
