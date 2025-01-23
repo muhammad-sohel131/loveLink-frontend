@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // For Navigation
+import { Link, useNavigate } from "react-router-dom"; // For Navigation
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/UseAxiosPublis";
 import { FaFilter } from "react-icons/fa";
@@ -39,7 +39,7 @@ const Biodatas = () => {
     <div className="section-container mx-auto py-10 flex gap-6">
       {/* Left Side - Filters */}
       <div className="w-1/4 bg-gray-100 p-4 rounded-lg shadow">
-        <h2 className="text-xl font-bold mb-4 flex gap-5 items-center text-[#ef7005]"><FaFilter /> Filter Biodata</h2>
+        <h2 className="text-xl font-bold mb-4 flex gap-5 items-center text-[#e57339]"><FaFilter /> Filter Biodata</h2>
         
         <label className="block font-semibold">Age Range</label>
         <input type="range" min="18" max="60" value={filters.ageRange[0]} className="w-full mt-2" onChange={(e) => setFilters({ ...filters, ageRange: [e.target.value, filters.ageRange[1]] })} />
@@ -68,12 +68,12 @@ const Biodatas = () => {
       <div className="w-3/4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredBiodatas.map((b) => (
           <div key={b.id} className="bg-white p-4 shadow-lg rounded-lg text-center">
-            <img src={b.image} alt="Profile" className="w-24 h-24 mx-auto rounded-full border-2 border-gray-300" />
-            <h3 className="text-lg font-semibold">{b.type}</h3>
-            <p className="text-gray-600">{b.division}</p>
+            <img src={b.profile_image} alt="Profile" className="w-24 h-24 mx-auto rounded-full border-2 border-gray-300" />
+            <h3 className="text-lg font-semibold">{b.gender}</h3>
+            <p className="text-gray-600">{b.present_division}</p>
             <p className="text-gray-600">{b.age} years</p>
             <p className="text-gray-600">{b.occupation}</p>
-            <button className="mt-2 px-4 py-2 bg-[#e57339] text-white rounded hover:bg-[#e57339]" onClick={() => handleViewProfile(b.id)}>View Profile</button>
+            <button className="mt-2 px-4 py-2 bg-[#e57339] text-white rounded hover:bg-[#e57339]"><Link to={`/biodata/${b.bio_id}`}>View Profile </Link></button>
           </div>
         ))}
       </div>
