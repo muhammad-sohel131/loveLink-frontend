@@ -21,6 +21,7 @@ import ApprovedContact from "../Pages/Dashboard/ApprovedContact/ApprovedContact"
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 import ApprovedPremium from "../Pages/Dashboard/ApprovedPremium/ApprovedPremium";
 import BiodataDetails from "../Pages/BioDataDetails/BioDataDetails";
+import MyFavourites from "../Pages/Dashboard/MyFavourites/MyFavourites";
 export const routes =  createBrowserRouter([
     {
         path: "/",
@@ -78,7 +79,7 @@ export const routes =  createBrowserRouter([
             },
             {
                 path: "favourites-bio",
-                element: <FavouritesBio />
+                element: <MyFavourites />
             },
            
             {

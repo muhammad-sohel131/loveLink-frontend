@@ -45,13 +45,23 @@ const BiodataDetails = () => {
 
   if (isLoading || !biodata) return <div className="text-center text-lg mt-20">Loading...</div>;
 
-  const handleAddToFavorites = () => {
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    if (!favorites.some((fav) => fav.id === biodata.id)) {
-      localStorage.setItem("favorites", JSON.stringify([...favorites, biodata]));
-      alert("Added to favorites!");
-    } else {
-      alert("Already in favorites!");
+  const handleAddToFavorites = async () => {
+
+    try{
+      const bio = {
+        name: biodata.name,
+        bio_id: biodata.bio_id,
+        author_email: user.email,
+        permanent_division: biodata.permanent_division,
+        occupation: biodata.occupation
+      }
+      const result = await axiosPublic.post("/favourites",bio)
+      if(result.status === 400){
+        console.log("duplicate")
+      }
+      console.log("bio inserted", result)
+    }catch(err){
+      console.log(err)
     }
   };
 

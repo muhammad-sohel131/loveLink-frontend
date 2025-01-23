@@ -3,7 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import './Dashboard.css'
 
 export default function Dashboard() {
-  const isAdmin = true;
+  const isAdmin = false;
   return (
     <div className='flex gap-5 border-t-8 border-[#e57339]'>
       <div className='w-[200px] bg-[#e57339] h-screen'>
