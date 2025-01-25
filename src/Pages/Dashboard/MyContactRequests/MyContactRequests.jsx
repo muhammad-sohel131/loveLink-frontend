@@ -12,7 +12,7 @@ const MyContactRequests = () => {
   const {user}=useContext(AuthContext)
 
   const { data: requests, isLoading, refetch} = useQuery({
-    queryKey: ["requests"],
+    queryKey: ["Myrequests"],
     queryFn: async () => {
       const result = await axiosSecure.get(`/contact-requests?auth_email=${user.email}`);
       return result.data;
@@ -23,6 +23,7 @@ const MyContactRequests = () => {
     return <h2>Loading.....</h2>
   }
 
+  console.log(requests)
   const handleDelete = async (id) => {
     try {
       await axiosSecure.delete(`/contact-requests?bio_id=${id}&auth_email=${user.email}`);

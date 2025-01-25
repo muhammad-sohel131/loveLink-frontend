@@ -7,26 +7,6 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const ViewBiodata = () => {
     const [isPremiumModalOpen, setIsPremiumModalOpen] = useState(false);
     const [isPremium, setIsPremium] = useState(false);
-    // const biodata = {
-    //     type: "Marriage",
-    //     name: "John Doe",
-    //     profileImage: "https://via.placeholder.com/150",
-    //     dob: "1995-08-15",
-    //     height: "5'9\"",
-    //     weight: "70kg",
-    //     age: 28,
-    //     occupation: "Software Engineer",
-    //     race: "Fair",
-    //     fatherName: "Michael Doe",
-    //     motherName: "Sarah Doe",
-    //     permanentDivision: "Dhaka",
-    //     presentDivision: "Chattogram",
-    //     expectedPartnerAge: "22 - 28",
-    //     expectedPartnerHeight: "5'4\" - 5'8\"",
-    //     expectedPartnerWeight: "50kg - 65kg",
-    //     contactEmail: "john.doe@example.com",
-    //     mobileNumber: "+880 123 456 789",
-    // };
 
     const { user } = useContext(AuthContext)
     const axiosPublic = useAxiosPublic();
@@ -71,7 +51,7 @@ const ViewBiodata = () => {
     return (
         <div className="mx-auto w-[100%] p-6 bg-white shadow-md rounded-md mt-8">
             <h2 className="text-2xl font-semibold text-center mb-4">View Biodata</h2>
-            <div className="flex items-center gap-10">
+            <div className="lg:flex items-center gap-10">
                 <div className="flex flex-col items-center">
                     <img
                         src={biodata.profile_image}
@@ -82,7 +62,7 @@ const ViewBiodata = () => {
                     <p className="text-gray-600">{biodata.occupation}</p>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 mt-6">
+                <div className="grid md:grid-cols-3 grid-cols-2 gap-4 mt-6">
                     <div className="border p-2 rounded-md">
                         <strong className="capitalize">Biodata Type: </strong>{biodata.gender}
                     </div>

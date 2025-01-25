@@ -44,8 +44,8 @@ export default function Dashboard() {
     }
   }
   return (
-    <div className={`flex gap-5 border-t-8 `}>
-      <div className={`w-[200px] h-screen` } style={bgStyle}>
+    <div className={`lg:flex gap-5 border-t-8 `}>
+      <div className={`lg:w-[200px] lg:h-screen` } style={bgStyle}>
         {isAdmin ?
           <ul>
             <li><NavLink className='p-2 mb-2 text-white block text-lg border-b border-white cursor-pointer' to="adminDashboard">Admin Dashboard</NavLink></li>

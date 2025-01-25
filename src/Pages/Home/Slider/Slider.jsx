@@ -21,10 +21,10 @@ export default function Slider() {
     onSlideChange={() => console.log('slide change')}
     className='h-[300px]'
     >
-      <SwiperSlide><img className='w-full' src="/couple-1.jpg" alt="" /></SwiperSlide>
-      <SwiperSlide><img className='w-full' src='/couple-2.jpg' /></SwiperSlide>
-      <SwiperSlide><img className='w-full' src="/couple-3.jpg" alt="" /></SwiperSlide>
-      <SwiperSlide><img className='w-full' src="/couple-4.jpg" alt="" /></SwiperSlide>
+      <SwiperSlide><img className='w-full h-full object-cover' src="/couple-1.jpg" alt="" /></SwiperSlide>
+      <SwiperSlide><img className='w-full h-full object-cover' src='/couple-2.jpg' /></SwiperSlide>
+      <SwiperSlide><img className='w-full h-full object-cover' src="/couple-3.jpg" alt="" /></SwiperSlide>
+      <SwiperSlide><img className='w-full h-full object-cover' src="/couple-4.jpg" alt="" /></SwiperSlide>
     </Swiper>
   );
 };

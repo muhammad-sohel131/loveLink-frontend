@@ -28,9 +28,9 @@ const Biodatas = () => {
     .filter((b) => (filters.present_division ? b.present_division === filters.present_division : true));
 
   return (
-    <div className="section-container mx-auto py-10 flex gap-6">
+    <div className="section-container mx-auto py-10 md:flex gap-6">
       {/* Left Side - Filters */}
-      <div className="w-1/4 bg-gray-100 p-4 rounded-lg shadow">
+      <div className="md:w-1/4 bg-gray-100 p-4 rounded-lg shadow">
         <h2 className="text-xl font-bold mb-4 flex gap-5 items-center text-[#e57339]"><FaFilter /> Filter Biodata</h2>
         
         <label className="block font-semibold">Age Range</label>
@@ -57,7 +57,7 @@ const Biodatas = () => {
       </div>
 
       {/* Right Side - Biodata List */}
-      <div className="w-3/4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="md:w-3/4 grid md:mt-0 mt-10 grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredBiodatas.map((b) => (
           <div key={b.bio_id} className="bg-white p-4 shadow-lg rounded-lg text-center">
             <img src={b.profile_image} alt="Profile" className="w-24 h-24 mx-auto rounded-full border-2 border-gray-300" />
