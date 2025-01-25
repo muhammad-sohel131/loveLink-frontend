@@ -4,13 +4,11 @@ import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://love-link-backend.vercel.app'
 })
 const useAxiosSecure = () => {
     const navigate = useNavigate();
     const { logOut } = useContext(AuthContext)
-
- 
     axiosSecure.interceptors.request.use(function (config) {
         const token = localStorage.getItem('access-token')
         config.headers.authorization = `Bearer ${token}`;
@@ -20,7 +18,6 @@ const useAxiosSecure = () => {
     });
 
 
-    // intercepts 401 and 403 status
     axiosSecure.interceptors.response.use(function (response) {
         return response;
     }, async (error) => {

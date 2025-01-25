@@ -19,9 +19,12 @@ const ProfileCards = () => {
   if(isLoading){
     return <h2>Loading...</h2>
   }
-  const sortedProfiles = [...profiles].sort((a, b) => {
-    return sortOrder === "ascending" ? a.age - b.age : b.age - a.age;
-  });
+  let sortedProfiles = [];
+  if(profiles?.length > 0){
+    sortedProfiles = [...profiles].sort((a, b) => {
+      return sortOrder === "ascending" ? a.age - b.age : b.age - a.age;
+    });
+  }
 
   const handleViewProfile = (id) => {
     const isLoggedIn = false
