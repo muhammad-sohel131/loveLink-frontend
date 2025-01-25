@@ -17,12 +17,12 @@ import MyContactRequests from "../Pages/Dashboard/MyContactRequests/MyContactReq
 import FavouritesBio from "../Pages/Dashboard/FavouriteBio/FavouritesBio";
 import AdminRoute from "./AdminRoute";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
-import ApprovedContact from "../Pages/Dashboard/ApprovedContact/ApprovedContact";
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 import ApprovedPremium from "../Pages/Dashboard/ApprovedPremium/ApprovedPremium";
 import BiodataDetails from "../Pages/BioDataDetails/BioDataDetails";
 import MyFavourites from "../Pages/Dashboard/MyFavourites/MyFavourites";
 import Checkout from "../Pages/Checkout/Checkout";
+import ApprovedContactRequest from "../Pages/Dashboard/ApprovedContactRequest/ApprovedContactRequest";
 export const routes = createBrowserRouter([
     {
         path: "/",
@@ -100,7 +100,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: "approved-contact-requests",
-                element: <AdminRoute><ApprovedContact /></AdminRoute>
+                element: <AdminRoute><ApprovedContactRequest /></AdminRoute>
             }
         ]
     }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // For Navigation
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../hooks/UseAxiosPublis";
+import useAxiosPublic from "../../hooks/UseAxiosPublic";
 import { FaFilter } from "react-icons/fa";
 
 const Biodatas = () => {
@@ -9,7 +9,7 @@ const Biodatas = () => {
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const { data: biodata, refetch, error, isLoading } = useQuery({
-    queryKey: ["biodata"],
+    queryKey: ["biodatas"],
     queryFn: async () => {
       const result = await axiosPublic.get(`/bios`);
       return result.data;

@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useQuery } from '@tanstack/react-query';
-import useAxiosPublic from "../../../hooks/UseAxiosPublis";
+import useAxiosPublic from "../../../hooks/UseAxiosPublic";
 import { AuthContext } from "../../../Provider/AuthProvider";
 
 const ManageUsers = () => {

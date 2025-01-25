@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../Provider/AuthProvider";
-import useAxiosPublic from "../../../hooks/UseAxiosPublis";
+import useAxiosPublic from "../../../hooks/UseAxiosPublic";
 
 const ViewBiodata = () => {
     const [isPremiumModalOpen, setIsPremiumModalOpen] = useState(false);

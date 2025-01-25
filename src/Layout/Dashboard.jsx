@@ -3,7 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import './Dashboard.css'
 import { AuthContext } from '../Provider/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
-import useAxiosPublic from '../hooks/UseAxiosPublis';
+import useAxiosPublic from '../hooks/UseAxiosPublic';
 
 export default function Dashboard() {
   const [isAdmin, setAdmin] = useState(false)
@@ -19,7 +19,6 @@ export default function Dashboard() {
   });
 
   useEffect(() => {
-    console.log(bio)
     setAdmin(bio?.isAdmin)
   }, [bio])
 

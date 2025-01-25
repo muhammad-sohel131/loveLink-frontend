@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { AuthContext } from "../../Provider/AuthProvider";
-import useAxiosPublic from "../../hooks/UseAxiosPublis";
+import useAxiosPublic from "../../hooks/UseAxiosPublic";
 import { toast } from "react-toastify";
+import { useQuery } from "@tanstack/react-query";
 
 // Load Stripe Public Key
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_api);
@@ -20,6 +21,32 @@ const CheckoutForm = () => {
   const [error, setError] = useState("");
   const axiosPublic = useAxiosPublic();
 
+  const { data: bioData} = useQuery({
+    queryKey: ["bioId"],
+    queryFn: async () => {
+      const result = await axiosPublic.get(`/biosId/${id}`);
+      return result.data;
+    }
+  })
+
+  const handleRequestContact = async () => {
+    const contact = {
+      name: bioData.name,
+      auth_email: user.email,
+      email: bioData.email,
+      phone: bioData.mobile,
+      bio_id: bioData.bio_id,
+      status: 'pending'
+    }
+    try{
+      const result = await axiosPublic.post('/contact-requests', contact);
+      toast.success("You request has been sent!");
+    }catch(err){
+      console.log(err)
+      toast.error("Something Wrong to send request!")
+    }
+  }
+ 
   useEffect(()=> {
     axiosPublic.post('/create-payment-intent', {
       price: 5
@@ -61,7 +88,7 @@ const CheckoutForm = () => {
       toast.error("Something Wrong")
     }else{
       toast.success("Payment Successful!")
-      
+      handleRequestContact();
     }
     setLoading(false)
   };

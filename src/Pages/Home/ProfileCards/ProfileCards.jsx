@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../hooks/UseAxiosPublis";
+import useAxiosPublic from "../../../hooks/UseAxiosPublic";
 
 const ProfileCards = () => {
   const [sortOrder, setSortOrder] = useState("ascending");

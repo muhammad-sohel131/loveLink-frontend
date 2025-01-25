@@ -4,24 +4,24 @@ import './Nav.css'
 import { GiLovers } from "react-icons/gi";
 import { AuthContext } from '../../Provider/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
-import useAxiosPublic from '../../hooks/UseAxiosPublis';
+import useAxiosPublic from '../../hooks/UseAxiosPublic';
 
 export default function Nav() {
   const { user, logOut } = useContext(AuthContext)
   const axiosPublic = useAxiosPublic();
 
-  // const { data: biodata, error, isLoading } = useQuery({
-  //   queryKey: ["biodata", user.email],
-  //   queryFn: async () => {
-  //     const result = await axiosPublic.get(`/bios/${user.email}`);
-  //     return result.data;
-  //   }
-  // })
-  // if(isLoading){
-  //   return <h2>Loading...</h2>
-  // }
-  // const isAdmin = biodata?.isAdmin ? true: false;
-  const isAdmin = true
+  const { data: biodata, error, isLoading } = useQuery({
+    queryKey: ["bio"],
+    queryFn: async () => {
+      const result = await axiosPublic.get(`/bios/${user.email}`);
+      return result.data;
+    }
+  })
+  if(isLoading){
+    return <h2>Loading...</h2>
+  }
+  const isAdmin = biodata?.isAdmin ? true: false;
+  
   const url = isAdmin ? '/dashboard/adminDashboard' : '/dashboard/userHome'
   const handleLogout = () => {
     logOut()

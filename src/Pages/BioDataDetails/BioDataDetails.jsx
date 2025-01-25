@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-import useAxiosPublic from "../../hooks/UseAxiosPublis";
+import useAxiosPublic from "../../hooks/UseAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../Provider/AuthProvider"
 import { toast } from "react-toastify";

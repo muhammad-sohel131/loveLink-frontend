@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { AuthContext } from '../../../Provider/AuthProvider'
 import { useForm } from 'react-hook-form';
 import { imageUpload } from '../../../utils/imageUpload';
-import useAxiosPublic from '../../../hooks/UseAxiosPublis';
+import useAxiosPublic from '../../../hooks/UseAxiosPublic';
 import { useQuery } from "@tanstack/react-query";
 import { toast } from 'react-toastify';
 
