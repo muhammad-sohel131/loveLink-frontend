@@ -21,14 +21,6 @@ const Biodatas = () => {
   if (error) {
     console.log(error)
   }
-  const handleViewProfile = (id) => {
-    const isLoggedIn = localStorage.getItem("user"); // Assume login state is stored in localStorage
-    if (isLoggedIn) {
-      navigate(`/biodata/${id}`);
-    } else {
-      navigate("/login");
-    }
-  };
 
   const filteredBiodatas = biodata
     .filter((b) => b.age >= filters.ageRange[0] && b.age <= filters.ageRange[1])
@@ -67,7 +59,7 @@ const Biodatas = () => {
       {/* Right Side - Biodata List */}
       <div className="w-3/4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredBiodatas.map((b) => (
-          <div key={b.id} className="bg-white p-4 shadow-lg rounded-lg text-center">
+          <div key={b.bio_id} className="bg-white p-4 shadow-lg rounded-lg text-center">
             <img src={b.profile_image} alt="Profile" className="w-24 h-24 mx-auto rounded-full border-2 border-gray-300" />
             <h3 className="text-lg font-semibold">{b.gender}</h3>
             <p className="text-gray-600">{b.present_division}</p>

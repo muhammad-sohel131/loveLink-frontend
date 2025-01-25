@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import useAxiosPublic from "../../../hooks/UseAxiosPublic";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ViewBiodata = () => {
     const [isPremiumModalOpen, setIsPremiumModalOpen] = useState(false);
@@ -29,10 +30,12 @@ const ViewBiodata = () => {
 
     const { user } = useContext(AuthContext)
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
+
     const { data: biodata, error, isLoading } = useQuery({
         queryKey: ["biodata", user.email],
         queryFn: async () => {
-            const result = await axiosPublic.get(`/bios/${user.email}`);
+            const result = await axiosSecure.get(`/bios/${user.email}`);
             return result.data;
         }
     })
@@ -57,7 +60,7 @@ const ViewBiodata = () => {
             bio_id: biodata.bio_id,
         }
 
-        const result = await axiosPublic.post("/premiumBios",bio);
+        const result = await axiosSecure.post("/premiumBios",bio);
 
         setTimeout(() => {
             alert("Your biodata has been sent for premium approval!");

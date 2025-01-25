@@ -2,33 +2,40 @@ import { useState, useEffect, useContext } from "react";
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from "../../../hooks/UseAxiosPublic";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 const ManageUsers = () => {
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
+  let biodata = [];
 
-  const { data: biodata, refetch, error, isLoading } = useQuery({
-    queryKey: ["biodata"],
+  const { data: biodatas, refetch, error, isLoading } = useQuery({
+    queryKey: ["Managebiodata"],
     queryFn: async () => {
       const result = await axiosPublic.get(`/bios`);
       return result.data;
     }
   })
 
+
   if (isLoading) {
     return <h2>Loading...</h2>
   }
-  if (error) {
-    console.log(error)
+  
+  if(biodatas){
+    console.log(biodatas)
+    biodata = biodatas.filter(user => !user.isAdmin)
   }
-
   // Make user premium
   const handleMakeAdmin = async (biodataId) => {
     try {
-      const response = await axiosPublic.put(`makeAdmin/${biodataId}`);
+      const response = await axiosSecure.put(`makeAdmin/${biodataId}`);
       refetch();
-      console.log(response)
+      toast.success("Made Admin Successfully!")
     } catch (err) {
       console.log(err)
+      toast.error("Something Wrong during Make Admin")
     }
   };
 
@@ -52,6 +59,7 @@ const ManageUsers = () => {
                 <td className="border px-4 py-2">{user?.email}</td>
                 <td className="border px-4 py-2">
                   <button
+                    disabled={user.isAdmin}
                     onClick={() => handleMakeAdmin(user.bio_id)}
                     className="bg-[#e57339] text-white px-4 py-1 rounded hover:bg-blue-600"
                   >

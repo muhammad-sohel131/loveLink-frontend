@@ -3,15 +3,18 @@ import useAxiosPublic from "../../../hooks/UseAxiosPublic"
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+
 
 const MyContactRequests = () => {
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const {user}=useContext(AuthContext)
 
   const { data: requests, isLoading, refetch} = useQuery({
     queryKey: ["requests"],
     queryFn: async () => {
-      const result = await axiosPublic.get(`/contact-requests?auth_email=${user.email}`);
+      const result = await axiosSecure.get(`/contact-requests?auth_email=${user.email}`);
       return result.data;
     }
   })
@@ -22,7 +25,7 @@ const MyContactRequests = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axiosPublic.delete(`/contact-requests?bio_id=${id}&auth_email=${user.email}`);
+      await axiosSecure.delete(`/contact-requests?bio_id=${id}&auth_email=${user.email}`);
       toast.success("Deleted Successful!")
       refetch()
     } catch (error) {

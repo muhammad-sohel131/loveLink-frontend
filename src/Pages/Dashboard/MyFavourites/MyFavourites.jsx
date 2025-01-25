@@ -3,14 +3,16 @@ import useAxiosPublic from "../../../hooks/UseAxiosPublic";
 import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const MyFavourites = () => {
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const { user } = useContext(AuthContext)
     const { data: favourites, isError, isLoading, refetch } = useQuery({
         queryKey: ["favourites"],
         queryFn: async () => {
-            const result = await axiosPublic.get(`/favourites/${user.email}`);
+            const result = await axiosSecure.get(`/favourites/${user.email}`);
             return result.data;
         },
     });
@@ -22,7 +24,7 @@ const MyFavourites = () => {
     }
     const handleDelete = async (id) => {
         try{
-            const result = await axiosPublic.delete(`favourites/${id}`);
+            const result = await axiosSecure.delete(`favourites?bio_id=${id}&auth_email=${user.email}`);
             refetch()
             toast.success("Deleted Successfully!");
         }catch(err){

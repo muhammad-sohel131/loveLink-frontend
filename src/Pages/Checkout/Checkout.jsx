@@ -6,6 +6,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import useAxiosPublic from "../../hooks/UseAxiosPublic";
 import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 // Load Stripe Public Key
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_api);
@@ -20,11 +21,12 @@ const CheckoutForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const { data: bioData} = useQuery({
     queryKey: ["bioId"],
     queryFn: async () => {
-      const result = await axiosPublic.get(`/biosId/${id}`);
+      const result = await axiosSecure.get(`/biosId/${id}`);
       return result.data;
     }
   })
@@ -39,7 +41,7 @@ const CheckoutForm = () => {
       status: 'pending'
     }
     try{
-      const result = await axiosPublic.post('/contact-requests', contact);
+      const result = await axiosSecure.post('/contact-requests', contact);
       toast.success("You request has been sent!");
     }catch(err){
       console.log(err)
@@ -48,7 +50,7 @@ const CheckoutForm = () => {
   }
  
   useEffect(()=> {
-    axiosPublic.post('/create-payment-intent', {
+    axiosSecure.post('/create-payment-intent', {
       price: 5
     })
     .then(res => {

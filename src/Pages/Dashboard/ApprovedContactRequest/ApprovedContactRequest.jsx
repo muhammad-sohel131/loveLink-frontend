@@ -2,17 +2,19 @@ import { useState, useEffect } from "react";
 import useAxiosPublic from "../../../hooks/UseAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 
 
 const ApprovedContactRequest = () => {
     const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure();
  
     
   const { data: requests, isLoading, refetch} = useQuery({
     queryKey: ["requests"],
     queryFn: async () => {
-      const result = await axiosPublic.get(`/contact-requests?status=pending`);
+      const result = await axiosSecure.get(`/contact-requests?status=pending`);
       return result.data;
     }
   })
@@ -23,7 +25,7 @@ const ApprovedContactRequest = () => {
 
   const handleApprove = async (id, email) => {
     try {
-      await axiosPublic.put(`/contact-requests?bio_id=${id}&auth_email=${email}`); 
+      await axiosSecure.put(`/contact-requests?bio_id=${id}&auth_email=${email}`); 
       refetch()
       toast.success("Approvment Success!")
     } catch (error) {

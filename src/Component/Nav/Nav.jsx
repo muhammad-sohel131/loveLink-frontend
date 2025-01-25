@@ -5,15 +5,17 @@ import { GiLovers } from "react-icons/gi";
 import { AuthContext } from '../../Provider/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../hooks/UseAxiosPublic';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 export default function Nav() {
   const { user, logOut } = useContext(AuthContext)
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const { data: biodata, error, isLoading } = useQuery({
     queryKey: ["bio"],
     queryFn: async () => {
-      const result = await axiosPublic.get(`/bios/${user.email}`);
+      const result = await axiosSecure.get(`/bios/${user.email}`);
       return result.data;
     }
   })

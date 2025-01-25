@@ -4,6 +4,7 @@ import useAxiosPublic from "../../hooks/UseAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../Provider/AuthProvider"
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const BiodataDetails = () => {
   const { id } = useParams();
@@ -14,6 +15,8 @@ const BiodataDetails = () => {
 
   const { user } = useContext(AuthContext)
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
+
   const { data: biodataList, isLoading } = useQuery({
     queryKey: ["biodataList"],
     queryFn: async () => {
@@ -25,7 +28,7 @@ const BiodataDetails = () => {
   const { data: bio } = useQuery({
     queryKey: ["bio"],
     queryFn: async () => {
-      const result = await axiosPublic.get(`/bios/${user.email}`);
+      const result = await axiosSecure.get(`/bios/${user.email}`);
       return result.data;
     },
   });
@@ -56,7 +59,7 @@ const BiodataDetails = () => {
         permanent_division: biodata.permanent_division,
         occupation: biodata.occupation
       }
-      const result = await axiosPublic.post("/favourites", bio)
+      const result = await axiosSecure.post("/favourites", bio)
       toast.success("Added to Favorite List!")
     } catch (err) {
       console.log(err)

@@ -5,17 +5,19 @@ import { imageUpload } from '../../../utils/imageUpload';
 import useAxiosPublic from '../../../hooks/UseAxiosPublic';
 import { useQuery } from "@tanstack/react-query";
 import { toast } from 'react-toastify';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 export default function EditBio() {
     const { user } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors } } = useForm();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
 
     const { data, error, isLoading} = useQuery({
         queryKey: ["biodata", user.email],
         queryFn: async () => {
-            const result = await axiosPublic.get(`/bios/${user.email}`);
+            const result = await axiosSecure.get(`/bios/${user.email}`);
             return result.data;
         }
     })
@@ -26,7 +28,7 @@ export default function EditBio() {
             const resImage = await imageUpload(currentData.profile_image[0]);
             currentData.profile_image = resImage.data?.display_url;
         }
-        const bioRes = await axiosPublic.post('/bios', currentData)
+        const bioRes = await axiosSecure.post('/bios', currentData)
         toast.success("Saved the changes!")
        }catch(err){
         console.log(err)

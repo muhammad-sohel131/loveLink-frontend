@@ -2,14 +2,16 @@ import { useState, useEffect, useContext } from "react";
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from "../../../hooks/UseAxiosPublic";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ApprovedPremium = () => {
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const { data: biodata, refetch, isLoading } = useQuery({
     queryKey: ["premiumBiodata"],
     queryFn: async () => {
-      const result = await axiosPublic.get(`/premiumBios`);
+      const result = await axiosSecure.get(`/premiumBios`);
       return result.data;
     }
   })
@@ -22,10 +24,9 @@ const ApprovedPremium = () => {
   // Make user premium
   const handleMakePremium = async (biodataId) => {
     try {
-      const response = await axiosPublic.put(`makePremium/${biodataId}`);
-      const result = await axiosPublic.delete(`/premiumBios/${biodataId}`)
+      const response = await axiosSecure.put(`makePremium/${biodataId}`);
+      const result = await axiosSecure.delete(`/premiumBios/${biodataId}`)
       refetch();
-      console.log(response,result)
     } catch (err) {
       console.log(err)
     }
