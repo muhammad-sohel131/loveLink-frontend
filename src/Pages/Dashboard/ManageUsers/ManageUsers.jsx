@@ -41,7 +41,6 @@ const ManageUsers = () => {
             <tr>
               <th className="border px-4 py-2">Name</th>
               <th className="border px-4 py-2">Email</th>
-              <th className="border px-4 py-2">Biodata ID</th>
               <th className="border px-4 py-2">Action</th>
             </tr>
           </thead>

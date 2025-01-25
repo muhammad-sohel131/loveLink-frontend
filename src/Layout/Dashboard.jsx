@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import './Dashboard.css'
+import { AuthContext } from '../Provider/AuthProvider';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '../hooks/UseAxiosPublis';
 
 export default function Dashboard() {
-  const isAdmin = false;
+  const [isAdmin, setAdmin] = useState(false)
+  const { user } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
+
+  const { data: bio, isError, isLoading, refetch } = useQuery({
+    queryKey: ["bio"],
+    queryFn: async () => {
+      const result = await axiosPublic.get(`/bios/${user.email}`);
+      return result.data;
+    },
+  });
+
+  useEffect(() => {
+    console.log(bio)
+    setAdmin(bio?.isAdmin)
+  }, [bio])
+
+  if(isLoading) return <h2>Loading...</h2>
   return (
     <div className='flex gap-5 border-t-8 border-[#e57339]'>
       <div className='w-[200px] bg-[#e57339] h-screen'>

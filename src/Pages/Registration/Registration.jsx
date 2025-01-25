@@ -4,10 +4,12 @@ import { useForm } from "react-hook-form"
 import { AuthContext } from '../../Provider/AuthProvider';
 import { imageUpload } from '../../utils/imageUpload';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export default function Registration() {
     const { register, handleSubmit, formState: {errors} } = useForm();
-    const { createUser, updateUserProfile } = useContext(AuthContext)
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
         const image = data.image[0];
@@ -19,8 +21,8 @@ export default function Registration() {
             .then(r => {
                 updateUserProfile(data.name, data.image)
                 .then(() => {
-                    console.log("created success")
-                    toast.success("Registration successful!")
+                    toast.success("Registration successful!");
+                    navigate("/")
                 })
             })
         })

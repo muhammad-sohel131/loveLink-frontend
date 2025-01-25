@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async'
 import { useForm } from "react-hook-form"
 import { AuthContext } from '../../Provider/AuthProvider';
 import { toast } from 'react-toastify';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export default function Login() {
     const { register, handleSubmit, formState: {errors} } = useForm();
@@ -27,8 +27,8 @@ export default function Login() {
     const handleGoogleLogin = () => {
         googleSignIn()
         .then(res => {
-            console.log(res)
             toast.success("Login Successful")
+            navigate(from, {replace: true})
         })
         .catch(err => {
             console.log(err)
@@ -50,8 +50,10 @@ export default function Login() {
                         <input className='bg-[#e57339] text-white p-2 cursor-pointer rounded-lg ' type="submit" value="Login" />
 
                         <button onClick={handleGoogleLogin} className='bg-[#000] text-[#e57339] my-5 p-2 cursor-pointer rounded-lg'>Login with Google</button>
+
+                        <p>Don't have account? <Link className='text-[#e57339]' to='/register'>Register</Link></p>
                     </form>
-                    
+                   
                 </div>
                 <div className='w-[95%]'>
                 <iframe width="700px" height="500px" src="https://lottie.host/embed/19f4316f-dce7-4ce6-a27d-a151a94b1a42/tlk7fSWdEX.lottie"></iframe>

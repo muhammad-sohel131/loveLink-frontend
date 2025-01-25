@@ -5,10 +5,9 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 
 const ApprovedPremium = () => {
   const axiosPublic = useAxiosPublic();
-  const { user } = useContext(AuthContext)
 
-  const { data: biodata, refetch, error, isLoading } = useQuery({
-    queryKey: ["biodata"],
+  const { data: biodata, refetch, isLoading } = useQuery({
+    queryKey: ["premiumBiodata"],
     queryFn: async () => {
       const result = await axiosPublic.get(`/premiumBios`);
       return result.data;
@@ -18,9 +17,7 @@ const ApprovedPremium = () => {
   if (isLoading) {
     return <h2>Loading...</h2>
   }
-  if (error) {
-    console.log(error)
-  }
+  
 
   // Make user premium
   const handleMakePremium = async (biodataId) => {

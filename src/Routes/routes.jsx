@@ -1,6 +1,6 @@
 import {
     createBrowserRouter,
-  } from "react-router-dom";
+} from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
 import Biodatas from "../Pages/Biodatas/Biodatas";
@@ -22,7 +22,8 @@ import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 import ApprovedPremium from "../Pages/Dashboard/ApprovedPremium/ApprovedPremium";
 import BiodataDetails from "../Pages/BioDataDetails/BioDataDetails";
 import MyFavourites from "../Pages/Dashboard/MyFavourites/MyFavourites";
-export const routes =  createBrowserRouter([
+import Checkout from "../Pages/Checkout/Checkout";
+export const routes = createBrowserRouter([
     {
         path: "/",
         element: <Main />,
@@ -38,6 +39,10 @@ export const routes =  createBrowserRouter([
             {
                 path: "biodata/:id",
                 element: <PrivateRoute><BiodataDetails /></PrivateRoute>
+            },
+            {
+                path: "checkout/:id",
+                element: <PrivateRoute><Checkout /></PrivateRoute>
             },
             {
                 path: "about",
@@ -58,7 +63,7 @@ export const routes =  createBrowserRouter([
         ]
     },
     {
-        path:"dashboard",
+        path: "dashboard",
         element: <PrivateRoute><Dashboard /></PrivateRoute>,
         children: [
             {
@@ -81,7 +86,6 @@ export const routes =  createBrowserRouter([
                 path: "favourites-bio",
                 element: <MyFavourites />
             },
-           
             {
                 path: "adminDashboard",
                 element: <AdminRoute><AdminDashboard /></AdminRoute>

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { imageUpload } from '../../../utils/imageUpload';
 import useAxiosPublic from '../../../hooks/UseAxiosPublis';
 import { useQuery } from "@tanstack/react-query";
+import { toast } from 'react-toastify';
 
 export default function EditBio() {
     const { user } = useContext(AuthContext)
@@ -20,20 +21,23 @@ export default function EditBio() {
     })
 
     const onSubmit = async (currentData) => {
+       try{
         if(currentData.profile_image){
             const resImage = await imageUpload(currentData.profile_image[0]);
             currentData.profile_image = resImage.data?.display_url;
         }
         const bioRes = await axiosPublic.post('/bios', currentData)
-        console.log(bioRes)
+        toast.success("Saved the changes!")
+       }catch(err){
+        console.log(err)
+        toast.error("Failed to save the changes!")
+       }
     };
 
     if(isLoading){
         return <h2>Loading.....</h2>
     }
-    if(error){
-        console.log(error)
-    }
+    
     return (
         <div className="mx-auto mt-5 bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-semibold text-[#e57339] mb-4">Edit Bio</h2>

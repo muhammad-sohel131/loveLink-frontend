@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../hooks/UseAxiosPublis";
 import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const MyFavourites = () => {
     const axiosPublic = useAxiosPublic();
@@ -23,8 +24,9 @@ const MyFavourites = () => {
         try{
             const result = await axiosPublic.delete(`favourites/${id}`);
             refetch()
-            console.log(result)
+            toast.success("Deleted Successfully!");
         }catch(err){
+            toast.error("Something Wrong!")
             console.log(err)
         }
     };
