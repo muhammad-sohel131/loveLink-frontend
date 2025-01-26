@@ -1,5 +1,4 @@
 export const imageUpload = async (image) => {
-    console.log(image)
     const formData = new FormData();
     formData.append('image', image);
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${

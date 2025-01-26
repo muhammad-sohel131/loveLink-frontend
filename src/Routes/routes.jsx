@@ -23,10 +23,14 @@ import BiodataDetails from "../Pages/BioDataDetails/BioDataDetails";
 import MyFavourites from "../Pages/Dashboard/MyFavourites/MyFavourites";
 import Checkout from "../Pages/Checkout/Checkout";
 import ApprovedContactRequest from "../Pages/Dashboard/ApprovedContactRequest/ApprovedContactRequest";
+import NotFound from "../Pages/NotFound/NotFound";
+import GotMarried from "../Pages/Dashboard/GotMarried/GotMarried";
+import SuccessStories from "../Pages/Dashboard/SuccessStories/SuccessStories";
 export const routes = createBrowserRouter([
     {
         path: "/",
         element: <Main />,
+        errorElement: <NotFound />,
         children: [
             {
                 path: "/",
@@ -71,6 +75,10 @@ export const routes = createBrowserRouter([
                 element: <UserHome />
             },
             {
+                path: "success-stories",
+                element: <SuccessStories />
+            },
+            {
                 path: "edit-bio",
                 element: <EditBio />
             },
@@ -85,6 +93,10 @@ export const routes = createBrowserRouter([
             {
                 path: "favourites-bio",
                 element: <MyFavourites />
+            },
+            {
+                path: "got-married",
+                element: <GotMarried />
             },
             {
                 path: "adminDashboard",

@@ -15,7 +15,7 @@ export default function EditBio() {
 
 
     const { data, error, isLoading} = useQuery({
-        queryKey: ["biodata", user.email],
+        queryKey: ["Viewbiodata"],
         queryFn: async () => {
             const result = await axiosSecure.get(`/bios/${user.email}`);
             return result.data;
@@ -24,9 +24,12 @@ export default function EditBio() {
 
     const onSubmit = async (currentData) => {
        try{
-        if(currentData.profile_image){
+        if(currentData.profile_image.length > 0){
+            console.log('hit')
             const resImage = await imageUpload(currentData.profile_image[0]);
             currentData.profile_image = resImage.data?.display_url;
+        }else{
+            currentData.profile_image = data.profile_image;
         }
         const bioRes = await axiosSecure.post('/bios', currentData)
         toast.success("Saved the changes!")

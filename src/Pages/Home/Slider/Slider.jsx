@@ -17,8 +17,8 @@ export default function Slider() {
     navigation
     pagination={{ clickable: true }}
     scrollbar={{ draggable: true }}
-    onSwiper={(swiper) => console.log(swiper)}
-    onSlideChange={() => console.log('slide change')}
+    // onSwiper={(swiper) => console.log(swiper)}
+    // onSlideChange={() => console.log('slide change')}
     className='h-[300px]'
     >
       <SwiperSlide><img className='w-full h-full object-cover' src="/couple-1.jpg" alt="" /></SwiperSlide>

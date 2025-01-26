@@ -5,31 +5,49 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import { imageUpload } from '../../utils/imageUpload';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useAxiosPublic from '../../hooks/UseAxiosPublic';
 
 export default function Registration() {
-    const { register, handleSubmit, formState: {errors} } = useForm();
-    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { createUser, updateUserProfile, user } = useContext(AuthContext);
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
+
+    const saveToDatabase = async (newUser) => {
+        const currentData = {
+            name: newUser.name,
+            email: newUser.email,
+            profile_image: newUser.image
+        }
+        try {
+            const bioRes = await axiosPublic.post('/bios', currentData)
+            toast.success("Saved the changes!")
+        } catch (err) {
+            console.log(err)
+            toast.error("Failed to save the changes!")
+        }
+    }
 
     const onSubmit = (data) => {
         const image = data.image[0];
         imageUpload(image)
-        .then(res => {
-            data.image = res.data.display_url;
-            console.log(data)
-            createUser(data.email, data.password)
-            .then(r => {
-                updateUserProfile(data.name, data.image)
-                .then(() => {
-                    toast.success("Registration successful!");
-                    navigate("/")
-                })
+            .then(res => {
+                data.image = res.data.display_url;
+                createUser(data.email, data.password)
+                    .then(r => {
+                        updateUserProfile(data.name, data.image)
+                            .then(() => {
+                                console.log(data)
+                                saveToDatabase(data)
+                                navigate("/")
+                            })
+                    })
             })
-        })
-        .catch(err => {
-            console.log(err)
-            toast.error("Something Wrong! Please try later.")
-        })
+            .catch(err => {
+                console.log(err)
+                toast.error("Something Wrong! Please try later.")
+            })
     }
     return (
         <>
@@ -48,8 +66,8 @@ export default function Registration() {
                         <input className='bg-[#e57339] text-white p-2 rounded-lg ' type="submit" />
                     </form>
                 </div>
-                <div className='w-[95%]'>
-                <iframe  width="700px" height="500px" src="https://lottie.host/embed/3ecd2491-b3fa-4b84-aaae-4e4ada9e9c90/sXTx466qt2.lottie"></iframe>
+                <div className='w-[95%] hidden lg:block'>
+                    <iframe width="700px" height="500px" src="https://lottie.host/embed/3ecd2491-b3fa-4b84-aaae-4e4ada9e9c90/sXTx466qt2.lottie"></iframe>
                 </div>
             </div>
         </>

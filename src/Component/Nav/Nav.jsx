@@ -17,11 +17,9 @@ export default function Nav() {
   const { data: biodata, error, isLoading } = useQuery({
     queryKey: ["bio"],
     queryFn: async () => {
-      if (!user) return null; // Ensure user is available before making request
       const result = await axiosSecure.get(`/bios/${user.email}`);
       return result.data;
-    },
-    enabled: !!user, // Prevent the query from running if user is not logged in
+    }
   });
 
   if (isLoading) {

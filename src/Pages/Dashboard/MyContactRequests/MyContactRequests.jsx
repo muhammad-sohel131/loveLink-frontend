@@ -23,7 +23,6 @@ const MyContactRequests = () => {
     return <h2>Loading.....</h2>
   }
 
-  console.log(requests)
   const handleDelete = async (id) => {
     try {
       await axiosSecure.delete(`/contact-requests?bio_id=${id}&auth_email=${user.email}`);

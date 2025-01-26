@@ -5,6 +5,7 @@ import { AuthContext } from '../Provider/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../hooks/UseAxiosPublic';
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import Nav from '../Component/Nav/Nav';
 
 export default function Dashboard() {
   const [isAdmin, setAdmin] = useState(false)
@@ -19,7 +20,7 @@ export default function Dashboard() {
       })
   }
   const { data: bio, isError, isLoading, refetch } = useQuery({
-    queryKey: ["bio"],
+    queryKey: ["bioNav"],
     queryFn: async () => {
       const result = await axiosSecure.get(`/bios/${user.email}`);
       return result.data;
@@ -53,6 +54,9 @@ export default function Dashboard() {
             </NavLink></li>
             <li><NavLink className='p-2 mb-2 text-white block text-lg border-b border-white cursor-pointer' to="approved-premium">Approved Premium</NavLink></li>
             <li><NavLink className='p-2 mb-2 text-white block text-lg border-b border-white cursor-pointer' to="approved-contact-requests">Approved Contact Request</NavLink></li>
+            <li>
+              <NavLink className='p-2 mb-2 text-white block text-lg border-b border-white cursor-pointer' to="success-stories">Success Stories</NavLink>
+            </li>
             <li className='p-2 mb-2 text-white block text-lg border-b border-white cursor-pointer'><button onClick={handleLogout}>Logout</button></li>
           </ul> : <ul>
             <li><NavLink className='p-2 mb-2 text-white block text-lg border-b border-white cursor-pointer' to="userHome">Overview</NavLink></li>
@@ -60,6 +64,9 @@ export default function Dashboard() {
             <li><NavLink className='p-2 mb-2 text-white block text-lg border-b border-white cursor-pointer' to="view-bio">View Biodata</NavLink></li>
             <li><NavLink className='p-2 mb-2 text-white block text-lg border-b border-white cursor-pointer' to="my-contact-requests">My Contact Requests</NavLink></li>
             <li><NavLink className='p-2 mb-2 text-white block text-lg border-b border-white cursor-pointer' to="favourites-bio">Favourites Biodata</NavLink></li>
+            <li>
+              <NavLink className='p-2 mb-2 text-white block text-lg border-b border-white cursor-pointer' to="got-married">Got Married</NavLink>
+            </li>
             <li className='p-2 mb-2 text-white block text-lg border-b border-white cursor-pointer' onClick={handleLogout}>Logout</li>
           </ul>}
       </div>

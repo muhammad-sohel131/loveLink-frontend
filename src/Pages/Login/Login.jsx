@@ -55,7 +55,7 @@ export default function Login() {
                     </form>
                    
                 </div>
-                <div className='w-[95%]'>
+                <div className='w-[95%] hidden lg:block'>
                 <iframe width="700px" height="500px" src="https://lottie.host/embed/19f4316f-dce7-4ce6-a27d-a151a94b1a42/tlk7fSWdEX.lottie"></iframe>
                 </div>
             </div>
