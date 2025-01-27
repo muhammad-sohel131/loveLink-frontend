@@ -21,7 +21,7 @@ const BiodataDetails = () => {
     queryKey: ["biodataList"],
     queryFn: async () => {
       const result = await axiosPublic.get(`/bios`);
-      return result.data;
+      return result.data.biodatas;
     },
   });
 

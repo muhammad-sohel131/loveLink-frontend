@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../hooks/UseAxiosPublic";
+import { Link } from "react-router-dom";
 
 const ProfileCards = () => {
   const [sortOrder, setSortOrder] = useState("ascending");
@@ -26,14 +27,6 @@ const ProfileCards = () => {
     });
   }
 
-  const handleViewProfile = (id) => {
-    const isLoggedIn = false
-    if (isLoggedIn) {
-      navigate(`/profile/${id}`);
-    } else {
-      navigate("/login");
-    }
-  };
 
   return (
     <div className="section-container">
@@ -62,11 +55,9 @@ const ProfileCards = () => {
             <p className="text-gray-600 text-center">{profile.permanent_division}</p>
             <p className="text-gray-500 text-center">Age: {profile.age}</p>
             <p className="text-gray-500 text-center">{profile.occupation}</p>
-            <button
-              onClick={() => handleViewProfile(profile.bio_id)}
-              className="mt-4 bg-[#e57339] text-white w-full py-2 rounded-md hover:bg-[#e07339] transition"
+            <button className="mt-4 bg-[#e57339] text-white w-full py-2 rounded-md hover:bg-[#e07339] transition"
             >
-              View Profile
+              <Link to={`/biodata/${profile.bio_id}`}>View Profile</Link>
             </button>
           </div>
         ))}
