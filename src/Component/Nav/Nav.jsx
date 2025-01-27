@@ -27,7 +27,7 @@ export default function Nav() {
   }
 
   const isAdmin = biodata?.isAdmin || false;
-  const url = isAdmin ? "/dashboard/adminDashboard" : "/dashboard/userHome";
+  const url = isAdmin ? "/dashboard/adminDashboard" : "/dashboard/edit-bio";
 
   const handleLogout = () => {
     logOut().then(() => {

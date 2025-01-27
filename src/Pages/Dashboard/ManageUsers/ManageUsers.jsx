@@ -11,10 +11,10 @@ const ManageUsers = () => {
   let biodata = [];
 
   const { data: biodatas, refetch, error, isLoading } = useQuery({
-    queryKey: ["Managebiodata"],
+    queryKey: ["Managebiodatas"],
     queryFn: async () => {
       const result = await axiosPublic.get(`/bios`);
-      return result.data;
+      return result.data.biodatas;
     }
   })
 

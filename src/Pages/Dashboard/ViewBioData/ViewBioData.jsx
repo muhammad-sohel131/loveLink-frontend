@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import useAxiosPublic from "../../../hooks/UseAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 const ViewBiodata = () => {
     const [isPremiumModalOpen, setIsPremiumModalOpen] = useState(false);
@@ -32,7 +33,8 @@ const ViewBiodata = () => {
 
     // Confirm premium request
     const confirmMakePremium = async () => {
-        setIsPremiumModalOpen(false);
+        try{
+            setIsPremiumModalOpen(false);
         
         const bio = {
             name : biodata.name,
@@ -41,11 +43,12 @@ const ViewBiodata = () => {
         }
 
         const result = await axiosSecure.post("/premiumBios",bio);
+        toast.success("Request is sent to admin!");
+        }catch(err){
+            console.log(err)
+            toast.error("Something Wrong During To Sent!")
+        }
 
-        setTimeout(() => {
-            alert("Your biodata has been sent for premium approval!");
-            setIsPremium(true);
-        }, 1000);
     };
 
     return (

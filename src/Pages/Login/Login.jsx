@@ -9,8 +9,7 @@ export default function Login() {
     const { register, handleSubmit, formState: {errors} } = useForm();
     const { signIn, googleSignIn } = useContext(AuthContext)
     const navigate = useNavigate();
-    const location = useLocation();
-    const from = location?.state?.from?.pathname || '/';
+    const from = '/';
 
     const onSubmit = (data) => {
         signIn(data.email, data.password)
