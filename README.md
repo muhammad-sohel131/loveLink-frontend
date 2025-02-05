@@ -5,8 +5,10 @@ Welcome to **LoveLink**, the ultimate matrimonial platform designed to connect i
 ---
 
 ## Some Screenshorts
-![Home Page](https://i.ibb.co.com/wrhjJswS/love-Link1.png) 
-![Biodata Page](https://i.ibb.co.com/MyS4CSLd/love-Link-2.png) 
+<div align="center">
+  <img height="450" src="https://i.ibb.co.com/wrhjJswS/love-Link1.png"  />
+  <img height="450" src="https://i.ibb.co.com/MyS4CSLd/love-Link-2.png"  />
+</div> 
 
 ## 🌐 Live Website  
 🔗 **[Visit LoveLink](https://lovelink-5e84a.web.app)**  
