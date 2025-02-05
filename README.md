@@ -70,16 +70,21 @@ Follow these steps to run the **LoveLink** project locally.
 
 ```sh
 git clone https://github.com/muhammad-sohel131/loveLink-frontend.git
-cd lovelink
+cd loveLink-frontend
 ```
 ### 2️⃣ Install Dependencies
 ```sh
 npm install
 ```
 ### 3️⃣ Set Up Environment Variables
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-FIREBASE_API_KEY=your_firebase_api_key
+- VITE_apiKey=***
+- VITE_authDomain=***
+- VITE_projectId=***
+- VITE_storageBucket=***
+- VITE_messagingSenderId=***
+- VITE_appId=***
+- VITE_Image_Upload_token=***
+- VITE_Payment_api=***
 
 ### 4️⃣ Start the Development Server
 ```sh
@@ -87,7 +92,8 @@ npm run dev
 ```
 ### 4️⃣ Run the Backend Server
 ```sh
-cd backend
+git clone https://github.com/muhammad-sohel131/loveLink-server.git
+cd loveLink-server
 npm install
 npm start
 ```
