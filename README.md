@@ -4,6 +4,10 @@ Welcome to **LoveLink**, the ultimate matrimonial platform designed to connect i
 
 ---
 
+## Some Screenshorts
+![Home Page](https://i.ibb.co.com/wrhjJswS/love-Link1.png) 
+![Biodata Page](https://i.ibb.co.com/MyS4CSLd/love-Link-2.png) 
+
 ## 🌐 Live Website  
 🔗 **[Visit LoveLink](https://lovelink-5e84a.web.app)**  
 
@@ -55,5 +59,35 @@ Welcome to **LoveLink**, the ultimate matrimonial platform designed to connect i
 - **State Management:** TanStack Query  
 - **API Calls:** Axios  
 - **Backend (Connected To):** Node.js, Express.js, MongoDB  
+
+## 🛠️ How to Set Up the Project  
+
+Follow these steps to run the **LoveLink** project locally.  
+
+### 1️⃣ Clone the Repository  
+
+```sh
+git clone https://github.com/muhammad-sohel131/loveLink-frontend.git
+cd lovelink
+```
+### 2️⃣ Install Dependencies
+```sh
+npm install
+```
+### 3️⃣ Set Up Environment Variables
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+FIREBASE_API_KEY=your_firebase_api_key
+
+### 4️⃣ Start the Development Server
+```sh
+npm run dev
+```
+### 4️⃣ Run the Backend Server
+```sh
+cd backend
+npm install
+npm start
+```
 
 💙 **Thank you for using LoveLink! We hope you find your perfect match.** 🎉  
