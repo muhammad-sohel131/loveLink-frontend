@@ -27,7 +27,7 @@ export default function Nav() {
   });
 
   if (isLoading) {
-    return <HeaderLoading />;
+    // return <HeaderLoading />;
   }
 
   const isAdmin = biodata?.isAdmin || false;

@@ -42,7 +42,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: "biodata/:id",
-                element: <PrivateRoute><BiodataDetails /></PrivateRoute>
+                element: <BiodataDetails />
             },
             {
                 path: "checkout/:id",

@@ -1,13 +1,17 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/UseAxiosPublic";
 import { FaFilter } from "react-icons/fa";
 import DataLoading from "../../Component/DataLoading/DataLoading";
 
 const Biodatas = () => {
-  const [filters, setFilters] = useState({ ageRange: [18, 60], gender: "", present_division: "" });
-  const [page, setPage] = useState(1); // Track current page
+  const location = useLocation();
+  const userData = location.state;
+  const userGender = userData?.gender || ''
+  const userDivision = userData?.present_division || ''
+  const [filters, setFilters] = useState({ ageRange: [18, 60], gender: userGender, present_division: userDivision });
+  const [page, setPage] = useState(1); 
   const limit = 6; // Biodata per page
   const axiosPublic = useAxiosPublic();
 
@@ -46,12 +50,14 @@ const Biodatas = () => {
         <p className="text-gray-700">Age: {filters.ageRange[0]} - {filters.ageRange[1]}</p>
 
         <label className="block mt-4 font-semibold">Biodata Type</label>
-        <select className="w-full p-2 border rounded" onChange={(e) => setFilters({ ...filters, gender: e.target.value })}>
-          <option value="">All</option><option value="Male">Male</option><option value="Female">Female</option>
+        <select value={filters.gender} className="w-full p-2 border rounded" onChange={(e) => setFilters({ ...filters, gender: e.target.value })}>
+          <option value="">All</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
         </select>
 
         <label className="block mt-4 font-semibold">Division</label>
-        <select className="w-full p-2 border rounded" onChange={(e) => setFilters({ ...filters, present_division: e.target.value })}>
+        <select value={filters.present_division} className="w-full p-2 border rounded" onChange={(e) => setFilters({ ...filters, present_division: e.target.value })}>
           <option value="">All</option>
           <option value="Dhaka">Dhaka</option>
           <option value="Chattagram">Chattagram</option>

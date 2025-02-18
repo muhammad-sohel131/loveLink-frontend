@@ -46,16 +46,22 @@ const ProfileCards = () => {
         {sortedProfiles.length == 0 && <h2>No Premium Profile is Available</h2>} 
         {sortedProfiles.map((profile) => (
           <div key={profile.bio_id} className="bg-white shadow-md rounded-lg p-4">
+            <div className="flex flex-col gap-2">
             <img
               src={profile.profile_image}
               alt="Profile"
-              className="w-24 h-24 mx-auto rounded-full object-cover"
+              className="object-cover rounded-lg max-h-[240px]"
             />
-            <h3 className="text-lg font-semibold mt-4 text-center">{profile.bio_id}</h3>
-            <p className="text-gray-600 text-center">{profile.gender}</p>
-            <p className="text-gray-600 text-center">{profile.permanent_division}</p>
-            <p className="text-gray-500 text-center">Age: {profile.age}</p>
-            <p className="text-gray-500 text-center">{profile.occupation}</p>
+            <div className="text-left">
+            <h3 className="text-lg font-semibold mt-4"><b>ID: </b>{profile.bio_id}</h3>
+            <p className=""><b>Gender: </b>{profile.gender}</p>
+            <p className=""><b>Permanent Address: </b>{profile.permanent_division}</p>
+            <p className=""><b>Age: </b> {profile.age}</p>
+            <p className=""><b>Occupation: </b>{profile.occupation}</p>
+            </div>
+            </div>
+            
+            
             <button className="mt-4 bg-[#e57339] text-white w-full py-2 rounded-md hover:bg-[#e07339] transition"
             >
               <Link to={`/biodata/${profile.bio_id}`}>View Profile</Link>
