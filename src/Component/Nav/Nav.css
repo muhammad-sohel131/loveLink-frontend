@@ -1,3 +1,13 @@
 .active {
-    color: #e57339;
+    color: #e57339 !important;
+    font-weight: bold;
+}
+.mobile-menu li {
+    border-bottom: 1px solid gray;
+    margin-top: 10px;
+    padding: 5px 0px;
+}
+
+.mobile-menu li:last-child {
+    border-bottom: none;
 }

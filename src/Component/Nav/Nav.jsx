@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Nav.css";
 import { GiLovers } from "react-icons/gi";
 import { AuthContext } from "../../Provider/AuthProvider";
@@ -8,7 +8,10 @@ import useAxiosPublic from "../../hooks/UseAxiosPublic";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaBars } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import { IoIosLogOut } from "react-icons/io";
+import { CiLogin } from "react-icons/ci";
 import HeaderLoading from "../HeaderLoading/HeaderLoading";
+import { IoLogIn } from "react-icons/io5";
 
 export default function Nav() {
   const { user, logOut } = useContext(AuthContext);
@@ -37,17 +40,17 @@ export default function Nav() {
   };
 
   return (
-    <header className="border-b border-[#e57339] relative">
-      <div className="section-container flex justify-between py-5">
+    <header className="sticky top-0 shadow-lg bg-white z-50">
+      <div className="section-container flex justify-between py-3">
         {/* Logo */}
         <div className="logo">
-          <h2 className="text-3xl font-extrabold flex gap-4 text-[#e57339]">
-            <GiLovers /> Love Link
-          </h2>
+          <Link to='/' className="text-3xl font-extrabold flex gap-4 text-[#e57339]">
+          <GiLovers /> Love Link
+          </Link>
         </div>
 
         {/* Navigation Menu */}
-        <ul className="menu lg:flex hidden gap-5 text-lg">
+        <ul className="menu lg:flex items-center hidden gap-5 text-lg">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
@@ -67,13 +70,13 @@ export default function Nav() {
               <li>
                 <NavLink to={url}>Dashboard</NavLink>
               </li>
-              <li className="cursor-pointer" onClick={handleLogout}>
-                Logout
+              <li className="cursor-pointer bg-[#e57339] rounded-lg flex items-center justify-start gap-2 py-2 px-7 text-white shadow-md" onClick={handleLogout}>
+                <IoIosLogOut /> Logout
               </li>
             </>
           ) : (
             <li>
-              <NavLink to="/login">Login</NavLink>
+              <NavLink className="cursor-pointer bg-[#e57339] rounded-lg flex items-center justify-start gap-2 py-2 px-7 text-white shadow-md" to="/login"> <CiLogin /> Login</NavLink>
             </li>
           )}
         </ul>
@@ -83,8 +86,8 @@ export default function Nav() {
             {isOpen ? <IoMdClose /> : <FaBars />}
           </div>
           {/* menu */}
-          <div className="bg-white border border-b-[#e57] absolute left-0 z-10 top-[75px] rounded-lg w-full">
-            {isOpen && <ul className="menu gap-5 p-5 text-lg">
+          <div onClick={() => setOpen(!isOpen)} className="bg-white border border-b-[#e57339] absolute left-0 z-10 top-[60px] rounded-lg w-full shadow-md">
+            {isOpen && <ul className="menu mobile-menu gap-5 p-5 text-lg">
               <li>
                 <NavLink to="/">Home</NavLink>
               </li>
@@ -104,13 +107,13 @@ export default function Nav() {
                   <li>
                     <NavLink to={url}>Dashboard</NavLink>
                   </li>
-                  <li className="cursor-pointer" onClick={handleLogout}>
-                    Logout
+                  <li className="cursor-pointer bg-[#e57339] rounded-lg flex items-center justify-center gap-2 py-2 px-7 mt-5 text-white shadow-md" onClick={handleLogout}>
+                  <IoIosLogOut /> Logout
                   </li>
                 </>
               ) : (
                 <li>
-                  <NavLink to="/login">Login</NavLink>
+                  <NavLink className="cursor-pointer bg-[#e57339] rounded-lg flex items-center justify-start gap-2 py-2 px-7 text-white shadow-md" to="/login"> <CiLogin /> Login</NavLink>
                 </li>
               )}
             </ul>}
