@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../hooks/UseAxiosPublic";
 import { Link } from "react-router-dom";
+import DataLoading from "../../../Component/DataLoading/DataLoading";
 
 const ProfileCards = () => {
   const [sortOrder, setSortOrder] = useState("ascending");
@@ -18,7 +19,7 @@ const ProfileCards = () => {
   })
 
   if(isLoading){
-    return <h2>Loading...</h2>
+    return <DataLoading />
   }
   let sortedProfiles = [];
   if(profiles?.length > 0){

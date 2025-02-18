@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/UseAxiosPublic";
 import { FaFilter } from "react-icons/fa";
+import DataLoading from "../../Component/DataLoading/DataLoading";
 
 const Biodatas = () => {
   const [filters, setFilters] = useState({ ageRange: [18, 60], gender: "", present_division: "" });
@@ -19,7 +20,7 @@ const Biodatas = () => {
     }
   });
 
-  if (isLoading) return <h2>Loading...</h2>;
+  // if (isLoading) return <DataLoading />;
   if (error) console.log(error);
 
   // Extract pagination data
@@ -62,44 +63,45 @@ const Biodatas = () => {
         </select>
       </div>
 
-      {/* Right Side - Biodata List */}
+      {isLoading ? <DataLoading /> : 
       <div className="md:w-3/4">
-        <div className="grid md:mt-0 mt-10 grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredBiodatas.map((b) => (
-            <div key={b.bio_id} className="bg-white p-4 shadow-lg rounded-lg text-center">
-              <img src={b.profile_image} alt="Profile" className="w-24 h-24 mx-auto rounded-full border-2 border-gray-300" />
-              <h3 className="text-lg font-semibold">{b.gender}</h3>
-              <p className="text-gray-600">{b.present_division}</p>
-              <p className="text-gray-600">{b.age} years</p>
-              <p className="text-gray-600">{b.occupation}</p>
-              <button className="mt-2 px-4 py-2 bg-[#e57339] text-white rounded hover:bg-[#e57339]">
-                <Link to={`/biodata/${b.bio_id}`}>View Profile</Link>
-              </button>
-            </div>
-          ))}
-        </div>
-
-        {/* Pagination Controls */}
-        <div className="mt-6 flex justify-center gap-3">
-          <button 
-            className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
-            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-            disabled={page === 1}
-          >
-            Previous
-          </button>
-
-          <span className="text-lg font-semibold">Page {page} of {totalPages}</span>
-
-          <button 
-            className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
-            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-            disabled={page === totalPages}
-          >
-            Next
-          </button>
-        </div>
+      <div className="grid md:mt-0 mt-10 grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredBiodatas.map((b) => (
+          <div key={b.bio_id} className="bg-white p-4 shadow-lg rounded-lg text-center">
+            <img src={b.profile_image} alt="Profile" className="w-24 h-24 mx-auto rounded-full border-2 border-gray-300" />
+            <h3 className="text-lg font-semibold">{b.gender}</h3>
+            <p className="text-gray-600">{b.present_division}</p>
+            <p className="text-gray-600">{b.age} years</p>
+            <p className="text-gray-600">{b.occupation}</p>
+            <button className="mt-2 px-4 py-2 bg-[#e57339] text-white rounded hover:bg-[#e57339]">
+              <Link to={`/biodata/${b.bio_id}`}>View Profile</Link>
+            </button>
+          </div>
+        ))}
       </div>
+
+      {/* Pagination Controls */}
+      <div className="mt-6 flex justify-center gap-3">
+        <button 
+          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+        >
+          Previous
+        </button>
+
+        <span className="text-lg font-semibold">Page {page} of {totalPages}</span>
+
+        <button 
+          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={page === totalPages}
+        >
+          Next
+        </button>
+      </div>
+    </div>
+}
     </div>
   );
 };

@@ -8,6 +8,7 @@ import useAxiosPublic from "../../hooks/UseAxiosPublic";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaBars } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import HeaderLoading from "../HeaderLoading/HeaderLoading";
 
 export default function Nav() {
   const { user, logOut } = useContext(AuthContext);
@@ -23,7 +24,7 @@ export default function Nav() {
   });
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <HeaderLoading />;
   }
 
   const isAdmin = biodata?.isAdmin || false;

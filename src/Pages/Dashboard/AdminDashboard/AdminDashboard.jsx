@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import useAxiosPublic from "../../../hooks/UseAxiosPublic";
+import DataLoading from "../../../Component/DataLoading/DataLoading";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -17,7 +18,7 @@ const AdminDashboard = () => {
     }
   });
 
-  if (isLoading) return <h2 className="text-center text-xl font-semibold">Loading...</h2>;
+  if (isLoading) return <div className="flex justify-center items-center h-screen"><DataLoading /></div>
   if (error) return <h2 className="text-center text-red-500">Error loading data</h2>;
 
   // Data for Pie Chart
