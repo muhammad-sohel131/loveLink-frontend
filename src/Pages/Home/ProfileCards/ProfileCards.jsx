@@ -18,11 +18,11 @@ const ProfileCards = () => {
     }
   })
 
-  if(isLoading){
+  if (isLoading) {
     return <DataLoading />
   }
   let sortedProfiles = [];
-  if(profiles?.length > 0){
+  if (profiles?.length > 0) {
     sortedProfiles = [...profiles].sort((a, b) => {
       return sortOrder === "ascending" ? a.age - b.age : b.age - a.age;
     });
@@ -43,25 +43,23 @@ const ProfileCards = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {sortedProfiles.length == 0 && <h2>No Premium Profile is Available</h2>} 
+        {sortedProfiles.length == 0 && <h2>No Premium Profile is Available</h2>}
         {sortedProfiles.map((profile) => (
           <div key={profile.bio_id} className="bg-white shadow-md rounded-lg p-4">
             <div className="flex flex-col gap-2">
-            <img
-              src={profile.profile_image}
-              alt="Profile"
-              className="object-cover rounded-lg max-h-[240px]"
-            />
-            <div className="text-left">
-            <h3 className="text-lg font-semibold mt-4"><b>ID: </b>{profile.bio_id}</h3>
-            <p className=""><b>Gender: </b>{profile.gender}</p>
-            <p className=""><b>Permanent Address: </b>{profile.permanent_division}</p>
-            <p className=""><b>Age: </b> {profile.age}</p>
-            <p className=""><b>Occupation: </b>{profile.occupation}</p>
+              <img
+                src={profile.profile_image}
+                alt="Profile"
+                className="object-cover rounded-lg h-[240px]"
+              />
+              <div className="text-left">
+                <h3 className="text-lg font-semibold mt-4"><b>ID: </b>{profile.bio_id}</h3>
+                <p className=""><b>Gender: </b>{profile.gender}</p>
+                <p className=""><b>Permanent Address: </b>{profile.permanent_division}</p>
+                <p className=""><b>Age: </b> {profile.age}</p>
+                <p className=""><b>Occupation: </b>{profile.occupation}</p>
+              </div>
             </div>
-            </div>
-            
-            
             <button className="mt-4 bg-[#e57339] text-white w-full py-2 rounded-md hover:bg-[#e07339] transition"
             >
               <Link to={`/biodata/${profile.bio_id}`}>View Profile</Link>
