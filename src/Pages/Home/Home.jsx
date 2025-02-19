@@ -4,6 +4,7 @@ import ProfileCards from './ProfileCards/ProfileCards'
 import HowWorks from './HowWorks/HowWorks'
 import SuccessStory from './SuccessStory/SuccessStory'
 import SuccessCounter from './SuccessCounter/SuccessCounter'
+import Membership from './MemberShip/MemberShip'
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <HowWorks/>
       <SuccessCounter />
       <SuccessStory />
+      <Membership />
     </div>
   )
 }

@@ -34,7 +34,6 @@ export default function Nav() {
   if (isLoading) {
     // return <HeaderLoading />;
   }
-  console.log(biodata)
 
   const handleLogout = () => {
     logOut().then(() => {
