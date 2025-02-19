@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../Provider/AuthProvider"
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const BiodataDetails = () => {
   const { id } = useParams();
@@ -73,12 +74,12 @@ const BiodataDetails = () => {
 
   return (
     <div className="section-container pb-10">
-      <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+      <div className="p-6 bg-white shadow-md rounded-lg mt-10">
         <div className="flex flex-col md:flex-row items-center gap-6">
-          <img src={biodata.profile_image} alt="Profile" className="w-40 h-40 rounded-full border-4 border-gray-300" />
+          <img src={biodata.profile_image} alt="Profile" className="lg:w-1/2 w-full h-[400px] object-cover rounded-sm border-4 border-gray-300" />
           <div>
             <h2 className="text-2xl font-semibold">{biodata.name}</h2>
-            <div className="flex justify-between gap-12 my-8">
+            <div className="flex text-lg justify-between gap-12 my-8">
               <div>
 
                 <p className="text-gray-700">Present Division: <b>{biodata.present_division}</b></p>
@@ -102,15 +103,15 @@ const BiodataDetails = () => {
 
             {isPremium ? (
               <>
-                <p className="text-gray-700">📧 Email: {biodata.email}</p>
-                <p className="text-gray-700">📞 Phone: {biodata.mobile}</p>
+                <p className="text-gray-700">Email: {biodata.email}</p>
+                <p className="text-gray-700">Phone: {biodata.mobile}</p>
               </>
             ) : (
-              <p className="text-gray-500 italic mt-2">🔒 Contact information is only available for premium members.</p>
+              <p className="text-gray-500 italic mt-2">Contact information is only available for premium members.</p>
             )}
 
             <div className="mt-4 flex gap-4">
-              <button onClick={handleAddToFavorites} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Add to Favorites</button>
+              <button onClick={handleAddToFavorites} className="bg-[#e57339] text-white px-4 py-2 rounded">Add to Favorites</button>
               {!isPremium && (
                 <button onClick={handleRequestContactInfo} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
                   Request Contact Information
@@ -121,19 +122,28 @@ const BiodataDetails = () => {
         </div>
       </div>
       <div className="mt-10">
-        <h3 className="text-xl font-semibold mb-4">🔍 Similar Biodata</h3>
+        <h3 className="text-3xl font-bold mb-4">Similar Biodata</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {similarBiodatas.map((b) => (
-            <div key={b.bio_id} className="bg-gray-100 p-4 shadow-lg rounded-lg text-center">
-              <img src={b.profile_image} alt="Profile" className="w-20 h-20 mx-auto rounded-full border-2 border-gray-300" />
-              <h4 className="text-lg font-semibold">{b.gender}</h4>
-              <p className="text-gray-600">{b.present_division}</p>
-              <p className="text-gray-600">{b.age} years</p>
-              <p className="text-gray-600">{b.occupation}</p>
-              <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700" onClick={() => navigate(`/biodata/${b.bio_id}`)}>
-                View Profile
-              </button>
+          {similarBiodatas.map((profile) => (
+            <div key={profile.bio_id} className="bg-white shadow-md rounded-lg p-4">
+            <div className="flex flex-col gap-2">
+              <img
+                src={profile.profile_image}
+                alt="Profile"
+                className="object-cover rounded-lg h-[240px]"
+              />
+              <div className="text-left">
+                <h3 className="text-lg font-semibold mt-4"><b>ID: </b>{profile.bio_id}</h3>
+                <p><b>Gender: </b>{profile.gender}</p>
+                <p><b>Permanent Address: </b>{profile.permanent_division}</p>
+                <p><b>Age: </b>{profile.age}</p>
+                <p><b>Occupation: </b>{profile.occupation}</p>
+              </div>
             </div>
+            <button className="mt-4 bg-[#e57339] text-white w-full py-2 rounded-md hover:bg-[#e07339] transition">
+              <Link to={`/biodata/${profile.bio_id}`}>View Profile</Link>
+            </button>
+          </div>
           ))}
         </div>
       </div>

@@ -1,16 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from "react-hook-form"
 import { AuthContext } from '../../Provider/AuthProvider';
 import { imageUpload } from '../../utils/imageUpload';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useAxiosPublic from '../../hooks/UseAxiosPublic';
 
 export default function Registration() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, updateUserProfile, user } = useContext(AuthContext);
+    const [processing, setProcessing] = useState(false)
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
 
@@ -30,6 +30,7 @@ export default function Registration() {
     }
 
     const onSubmit = (data) => {
+        setProcessing(true)
         const image = data.image[0];
         imageUpload(image)
             .then(res => {
@@ -43,11 +44,15 @@ export default function Registration() {
                                 navigate("/")
                             })
                     })
+                    .catch(err => {
+                        toast.error("Maybe, The email is used.")
+                    })
             })
             .catch(err => {
                 console.log(err)
                 toast.error("Something Wrong! Please try later.")
             })
+            setProcessing(false)
     }
     return (
         <>
@@ -63,7 +68,7 @@ export default function Registration() {
                         <input className='rounded-lg border border-[#e57339] mb-5 p-2' type="email" placeholder='Email' {...register("email")} />
                         <input className='rounded-lg border border-[#e57339] mb-5 p-2' type="password" placeholder='Password' {...register("password")} />
                         <input className='rounded-lg border border-[#e57339] mb-5 p-2' type="file" {...register("image")} />
-                        <input className='bg-[#e57339] text-white p-2 rounded-lg ' type="submit" />
+                        <input disabled={processing} className='bg-[#e57339] cursor-pointer text-white p-2 rounded-lg' type="submit" value={processing ? 'Procesing' : 'Submit' } />
                     </form>
                 </div>
                 <div className='w-[95%] hidden lg:block'>

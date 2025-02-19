@@ -3,24 +3,26 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Contact() {
   return (
-    <div className="bg-gray-50 text-gray-900">
+    <div className="mb-10">
       {/* Hero Section */}
       <section className="relative h-[350px] flex items-center justify-center bg-cover bg-center text-white"
         style={{ backgroundImage: "url('./contact.jpg')" }}>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div className="relative z-10 text-center">
+       <div className="section-container">
+       <div className="relative z-10 text-center">
           <h1 className="text-5xl font-bold uppercase tracking-wide">Contact Us</h1>
-          <p className="text-lg mt-3 max-w-2xl mx-auto">We’d love to hear from you! Feel free to reach out for any inquiries or support.</p>
+          <p className="text-lg mt-3 max-w-2xl mx-auto">We'd love to hear from you! Feel free to reach out for any inquiries or support.</p>
         </div>
+       </div>
       </section>
 
       {/* Contact Information */}
-      <section className="py-16 text-center">
-        <h2 className="text-3xl font-semibold text-[#e57339]">Get in Touch</h2>
-        <div className="flex flex-wrap justify-center gap-10 mt-8">
+      <section className="py-10 section-container">
+        <h2 className="text-3xl font-bold text-[#e57339]">Get in Touch</h2>
+        <div className="flex flex-wrap justify-between gap-10 mt-8">
           {[
-            { icon: <FaPhoneAlt className="text-[#e57339] text-3xl" />, title: "Call Us", text: "01748617550" },
-            { icon: <FaEnvelope className="text-[#e57339] text-3xl" />, title: "Email Us", text: "sohelf@gmail.com" },
+            { icon: <FaPhoneAlt className="text-[#e57339] text-3xl" />, title: "Call Us", text: "01302633568" },
+            { icon: <FaEnvelope className="text-[#e57339] text-3xl" />, title: "Email Us", text: "sohelf131@gmail.com" },
             { icon: <FaMapMarkerAlt className="text-[#e57339] text-3xl" />, title: "Visit Us", text: "Dhaka, Bangladesh" },
           ].map((item, index) => (
             <div key={index} className="w-64 p-6 bg-white shadow-lg rounded-lg flex flex-col items-center">
@@ -33,7 +35,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Form */}
-      <section className="py-16 px-6 max-w-3xl mx-auto bg-white shadow-lg rounded-lg">
+      <section className="py-10 section-container px-6  bg-white shadow-lg rounded-lg">
         <h2 className="text-3xl font-semibold text-center text-[#e57339]">Send a Message</h2>
         <form className="mt-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
