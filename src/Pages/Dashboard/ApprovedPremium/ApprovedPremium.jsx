@@ -33,9 +33,9 @@ const ApprovedPremium = () => {
   };
 
   return (
-    <div className="p-6 section-container">
-      <h2 className="text-2xl font-semibold mb-4">Approved Premium Requests</h2>
-      <div className="overflow-x-auto">
+    <div className="p-6">
+      <h2 className="text-3xl font-bold mb-4">Approved Premium Requests</h2>
+      <div className="overflow-x-auto bg-white p-4 rounded-lg shadow-md">
         <table className="min-w-full border border-gray-300 bg-white">
           <thead className="bg-gray-100">
             <tr>

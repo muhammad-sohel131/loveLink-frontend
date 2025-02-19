@@ -35,9 +35,9 @@ const ApprovedContactRequest = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-semibold mb-4">Approved Contact Requests</h2>
-      <div className="overflow-x-auto">
+    <div className="p-6">
+      <h2 className="text-3xl font-bold mb-4">Approved Contact Requests</h2>
+      <div className="overflow-x-auto bg-white p-4 rounded-lg shadow-md">
         <table className="min-w-full border border-gray-300">
           <thead>
             <tr className="bg-gray-200 text-left">

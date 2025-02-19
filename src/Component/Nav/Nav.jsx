@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Nav.css";
 import { GiLovers } from "react-icons/gi";
@@ -15,6 +15,7 @@ import { IoLogIn } from "react-icons/io5";
 
 export default function Nav() {
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin, setAdmin] = useState(false)
   const [isOpen, setOpen] = useState(false)
   const axiosSecure = useAxiosSecure();
 
@@ -26,12 +27,14 @@ export default function Nav() {
     }
   });
 
+  useEffect(() => {
+    setAdmin(biodata?.isAdmin)
+  }, [biodata])
+
   if (isLoading) {
     // return <HeaderLoading />;
   }
-
-  const isAdmin = biodata?.isAdmin || false;
-  const url = isAdmin ? "/dashboard/adminDashboard" : "/dashboard/edit-bio";
+  console.log(biodata)
 
   const handleLogout = () => {
     logOut().then(() => {
@@ -67,16 +70,19 @@ export default function Nav() {
           {/* Conditional User Navigation */}
           {user ? (
             <>
+              {isAdmin ? <li>
+                <NavLink to='/dashboard/adminDashboard'>Dashboard</NavLink>
+              </li> :
               <li>
-                <NavLink to={url}>Dashboard</NavLink>
-              </li>
-              <li className="cursor-pointer bg-[#e57339] rounded-lg flex items-center justify-start gap-2 py-2 px-7 text-white shadow-md" onClick={handleLogout}>
+              <NavLink to="/dashboard/edit-bio">Dashboard</NavLink>
+            </li>}
+              <li className="cursor-pointer rounded-lg flex items-center justify-start gap-2 py-2 px-7 shadow-md" onClick={handleLogout}>
                 <IoIosLogOut /> Logout
               </li>
             </>
           ) : (
             <li>
-              <NavLink className="cursor-pointer bg-[#e57339] rounded-lg flex items-center justify-start gap-2 py-2 px-7 text-white shadow-md" to="/login"> <CiLogin /> Login</NavLink>
+              <NavLink className="cursor-pointer rounded-lg flex items-center justify-start gap-2 py-2 px-7 shadow-md" to="/login"> <CiLogin /> Login</NavLink>
             </li>
           )}
         </ul>
@@ -107,13 +113,13 @@ export default function Nav() {
                   <li>
                     <NavLink to={url}>Dashboard</NavLink>
                   </li>
-                  <li className="cursor-pointer bg-[#e57339] rounded-lg flex items-center justify-center gap-2 py-2 px-7 mt-5 text-white shadow-md" onClick={handleLogout}>
+                  <li className="cursor-pointer rounded-lg flex items-center justify-center gap-2 py-2 px-7 mt-5 shadow-md" onClick={handleLogout}>
                   <IoIosLogOut /> Logout
                   </li>
                 </>
               ) : (
                 <li>
-                  <NavLink className="cursor-pointer bg-[#e57339] rounded-lg flex items-center justify-start gap-2 py-2 px-7 text-white shadow-md" to="/login"> <CiLogin /> Login</NavLink>
+                  <NavLink className="cursor-pointer rounded-lg flex items-center justify-start gap-2 py-2 px-7 shadow-md" to="/login"> <CiLogin /> Login</NavLink>
                 </li>
               )}
             </ul>}

@@ -41,10 +41,17 @@ const AdminDashboard = () => {
 
   return (
     <div className="container mx-auto py-10 px-5">
-      <h1 className="text-3xl font-bold text-center text-gray-800">Admin Dashboard</h1>
-
+      <h1 className="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
+      <div className="lg:flex gap-5 items-start">
+         {/* Pie Chart */}
+      <div className="mt-10 lg:w-1/3 flex justify-center">
+        <div className="w-full bg-white p-5 rounded-lg shadow-lg">
+          <h2 className="text-xl font-semibold text-center text-gray-700">Statistics Overview</h2>
+          <Pie data={chartData} />
+        </div>
+      </div>
       {/* Dashboard Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 text-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 text-center">
         <div className="p-5 bg-blue-500 text-white rounded-lg shadow-lg">
           <h2 className="text-xl font-semibold">Total Biodata</h2>
           <p className="text-3xl font-bold">{stats.totalBiodata}</p>
@@ -66,14 +73,7 @@ const AdminDashboard = () => {
           <p className="text-3xl font-bold">${stats.totalRevenue}</p>
         </div> */}
       </div>
-
-      {/* Pie Chart */}
-      <div className="mt-10 flex justify-center">
-        <div className="w-full bg-white p-5 rounded-lg shadow-lg">
-          <h2 className="text-xl font-semibold text-center text-gray-700">Statistics Overview</h2>
-          <Pie data={chartData} />
-        </div>
-      </div>
+      </div>  
     </div>
   );
 };
