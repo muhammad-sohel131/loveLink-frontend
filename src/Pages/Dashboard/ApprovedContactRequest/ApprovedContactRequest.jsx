@@ -3,6 +3,7 @@ import useAxiosPublic from "../../../hooks/UseAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import DataLoading from "../../../Component/DataLoading/DataLoading";
 
 
 
@@ -20,7 +21,7 @@ const ApprovedContactRequest = () => {
   })
 
   if(isLoading){
-    return <h2>Loading.....</h2>
+    return <DataLoading />
   }
 
   const handleApprove = async (id, email) => {

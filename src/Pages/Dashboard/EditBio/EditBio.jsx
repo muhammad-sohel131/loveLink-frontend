@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../Provider/AuthProvider'
 import { useForm } from 'react-hook-form';
 import { imageUpload } from '../../../utils/imageUpload';
@@ -6,9 +6,11 @@ import useAxiosPublic from '../../../hooks/UseAxiosPublic';
 import { useQuery } from "@tanstack/react-query";
 import { toast } from 'react-toastify';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import DataLoading from '../../../Component/DataLoading/DataLoading';
 
 export default function EditBio() {
     const { user } = useContext(AuthContext)
+    const [processing, setProcessing] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
@@ -23,6 +25,7 @@ export default function EditBio() {
     })
 
     const onSubmit = async (currentData) => {
+        setProcessing(true)
        try{
         if(currentData.profile_image.length > 0){
             console.log('hit')
@@ -37,16 +40,18 @@ export default function EditBio() {
         console.log(err)
         toast.error("Failed to save the changes!")
        }
+
+       setProcessing(false)
     };
 
     if(isLoading){
-        return <h2>Loading.....</h2>
+        return <DataLoading />
     }
     
     return (
-        <div className="mx-auto mt-5 bg-white p-6 rounded-lg shadow-md">
+        <div className="m-5">
             <h2 className="text-2xl font-semibold text-[#e57339] mb-4">Edit Bio</h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+            <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start bg-white p-6 rounded-lg shadow-md">
                 <div>
                     <label className="block text-gray-700">Gender:</label>
                     <select defaultValue={data?.gender} {...register("gender", { required: true })} className="w-full p-2 border rounded">
@@ -208,8 +213,8 @@ export default function EditBio() {
                     <input {...register("email")} type="email" value={user?.email} readOnly className="w-full p-2 border rounded bg-gray-200" />
                 </div>
 
-                <button type="submit" className="w-full bg-[#e57339] text-white py-2 rounded hover:bg-[#cc6633]">
-                    Save And Publish Now
+                <button disabled={processing} type="submit" className="w-full bg-[#e57339] text-white py-2 rounded hover:bg-[#cc6633]">
+                    {processing ? 'Processing...' : 'Save And Publish Now'}
                 </button>
             </form>
         </div>

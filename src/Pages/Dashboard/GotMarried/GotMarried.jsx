@@ -5,9 +5,11 @@ import { imageUpload } from '../../../utils/imageUpload';
 import { useQuery } from "@tanstack/react-query";
 import { toast } from 'react-toastify';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import DataLoading from '../../../Component/DataLoading/DataLoading';
 
 export default function GotMarried() {
     const { user } = useContext(AuthContext);
+    const [processing, setProcessing] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm();
     const axiosSecure = useAxiosSecure();
     const [rating, setRating] = useState(0); 
@@ -21,6 +23,7 @@ export default function GotMarried() {
     });
 
     const onSubmit = async (formData) => {
+        setProcessing(true)
         const currentData = {};
         try {
             if (formData.profile_image.length > 0) {
@@ -46,14 +49,15 @@ export default function GotMarried() {
             console.log(err);
             toast.error("Failed to save the changes!");
         }
+        setProcessing(false)
     };
 
     if (isLoading) {
-        return <h2>Loading.....</h2>;
+        return <DataLoading />
     }
 
     return (
-        <div className="mx-auto mt-5 bg-white p-6 rounded-lg shadow-md">
+        <div className="m-5 bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-semibold text-[#e57339] mb-4">Submit Your Feedback</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
                 
@@ -103,8 +107,8 @@ export default function GotMarried() {
                     </div>
                 </div>
 
-                <button type="submit" className="w-full bg-[#e57339] text-white py-2 rounded hover:bg-[#cc6633]">
-                    Submit
+                <button disabled={processing} type="submit" className="w-full bg-[#e57339] text-white py-2 rounded hover:bg-[#cc6633]">
+                    {processing ? 'Processing' : 'Submit'}
                 </button>
             </form>
         </div>

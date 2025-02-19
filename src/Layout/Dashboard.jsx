@@ -40,6 +40,7 @@ export default function Dashboard() {
         {isAdmin ?
           <ul>
             <li><NavLink className='p-2 mb-2  block text-lg border-b border-white cursor-pointer' to="adminDashboard">Admin Dashboard</NavLink></li>
+            <li><NavLink className='p-2 mb-2  block text-lg border-b border-white cursor-pointer' to="profile">Profile</NavLink></li>
             <li><NavLink className='p-2 mb-2  block text-lg border-b border-white cursor-pointer' to="manage-users">Manage Users
             </NavLink></li>
             <li><NavLink className='p-2 mb-2  block text-lg border-b border-white cursor-pointer' to="approved-premium">Approved Premium</NavLink></li>
@@ -49,6 +50,7 @@ export default function Dashboard() {
             </li>
             <li className='cursor-pointer rounded-lg flex items-center justify-center gap-2 py-2 px-7 mt-5 shadow-md'><button onClick={handleLogout}>Logout</button></li>
           </ul> : <ul>
+          <li><NavLink className='p-2 mb-2  block text-lg border-b border-white cursor-pointer' to="userDashboard">User Dashboard</NavLink></li>
             <li><NavLink className='p-2 mb-2  block text-lg border-b border-white cursor-pointer' to="edit-bio">Edit Biodata</NavLink></li>
             <li><NavLink className='p-2 mb-2  block text-lg border-b border-white cursor-pointer' to="view-bio">View Biodata</NavLink></li>
             <li><NavLink className='p-2 mb-2 block text-lg border-b border-white cursor-pointer' to="my-contact-requests">My Contact Requests</NavLink></li>

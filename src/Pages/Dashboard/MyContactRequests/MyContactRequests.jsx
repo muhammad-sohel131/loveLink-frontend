@@ -4,6 +4,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import DataLoading from "../../../Component/DataLoading/DataLoading";
 
 
 const MyContactRequests = () => {
@@ -20,7 +21,7 @@ const MyContactRequests = () => {
   })
 
   if(isLoading){
-    return <h2>Loading.....</h2>
+    return <DataLoading />
   }
 
   const handleDelete = async (id) => {
@@ -35,7 +36,7 @@ const MyContactRequests = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+    <div className="m-6 p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl font-semibold mb-4">📜 My Contact Requests</h2>
       <div className="overflow-x-auto">
         <table className="min-w-full border border-gray-300">

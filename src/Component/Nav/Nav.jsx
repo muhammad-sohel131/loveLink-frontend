@@ -74,7 +74,7 @@ export default function Nav() {
                 <NavLink to='/dashboard/adminDashboard'>Dashboard</NavLink>
               </li> :
               <li>
-              <NavLink to="/dashboard/edit-bio">Dashboard</NavLink>
+              <NavLink to="/dashboard/userDashboard">Dashboard</NavLink>
             </li>}
               <li className="cursor-pointer rounded-lg flex items-center justify-start gap-2 py-2 px-7 shadow-md" onClick={handleLogout}>
                 <IoIosLogOut /> Logout
@@ -110,9 +110,12 @@ export default function Nav() {
               {/* Conditional User Navigation */}
               {user ? (
                 <>
-                  <li>
-                    <NavLink to={url}>Dashboard</NavLink>
-                  </li>
+                  {isAdmin ? <li>
+                <NavLink to='/dashboard/adminDashboard'>Dashboard</NavLink>
+              </li> :
+              <li>
+              <NavLink to="/dashboard/userDashboard">Dashboard</NavLink>
+            </li>}
                   <li className="cursor-pointer rounded-lg flex items-center justify-center gap-2 py-2 px-7 mt-5 shadow-md" onClick={handleLogout}>
                   <IoIosLogOut /> Logout
                   </li>

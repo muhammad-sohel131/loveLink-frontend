@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import DataLoading from "../../../Component/DataLoading/DataLoading";
 
 const MyFavourites = () => {
     const axiosPublic = useAxiosPublic();
@@ -20,7 +21,7 @@ const MyFavourites = () => {
         console.log(isError)
     }
     if (isLoading) {
-        return <h2>Loading....</h2>
+        return <DataLoading />
     }
     const handleDelete = async (id) => {
         try{
@@ -34,7 +35,7 @@ const MyFavourites = () => {
     };
 
     return (
-        <div className="container mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+        <div className="m-6 p-6 bg-white shadow-lg rounded-lg">
             <h2 className="text-2xl font-bold text-gray-700 mb-4">📌 My Favourite Biodata</h2>
 
             {favourites.length === 0 ? (

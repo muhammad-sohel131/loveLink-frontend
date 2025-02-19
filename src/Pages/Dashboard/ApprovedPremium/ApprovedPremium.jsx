@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from "../../../hooks/UseAxiosPublic";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import DataLoading from "../../../Component/DataLoading/DataLoading";
 
 const ApprovedPremium = () => {
   const axiosPublic = useAxiosPublic();
@@ -17,7 +18,7 @@ const ApprovedPremium = () => {
   })
 
   if (isLoading) {
-    return <h2>Loading...</h2>
+    return <DataLoading />
   }
   
 

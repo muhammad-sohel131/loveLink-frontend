@@ -14,7 +14,6 @@ import PrivateRoute from "./PrivateRoute";
 import EditBio from "../Pages/Dashboard/EditBio/EditBio";
 import ViewBiodata from "../Pages/Dashboard/ViewBioData/ViewBioData";
 import MyContactRequests from "../Pages/Dashboard/MyContactRequests/MyContactRequests";
-import FavouritesBio from "../Pages/Dashboard/FavouriteBio/FavouritesBio";
 import AdminRoute from "./AdminRoute";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
@@ -26,6 +25,8 @@ import ApprovedContactRequest from "../Pages/Dashboard/ApprovedContactRequest/Ap
 import NotFound from "../Pages/NotFound/NotFound";
 import GotMarried from "../Pages/Dashboard/GotMarried/GotMarried";
 import SuccessStories from "../Pages/Dashboard/SuccessStories/SuccessStories";
+import Profile from "../Pages/Dashboard/AdminProfile/Profile";
+import UserDashboard from "../Pages/Dashboard/UserDashboard/UserDashboard";
 export const routes = createBrowserRouter([
     {
         path: "/",
@@ -71,8 +72,8 @@ export const routes = createBrowserRouter([
         element: <PrivateRoute><Dashboard /></PrivateRoute>,
         children: [
             {
-                path: "userHome",
-                element: <UserHome />
+                path: "userDashboard",
+                element: <UserDashboard />
             },
             {
                 path: "success-stories",
@@ -101,6 +102,10 @@ export const routes = createBrowserRouter([
             {
                 path: "adminDashboard",
                 element: <AdminRoute><AdminDashboard /></AdminRoute>
+            },
+            {
+                path: 'profile',
+                element: <AdminRoute><Profile /></AdminRoute>
             },
             {
                 path: "manage-users",

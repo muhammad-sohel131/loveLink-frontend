@@ -1,17 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../Provider/AuthProvider";
-import useAxiosPublic from "../../../hooks/UseAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { toast } from "react-toastify";
 import DataLoading from "../../../Component/DataLoading/DataLoading";
 
-const ViewBiodata = () => {
-    const [isPremiumModalOpen, setIsPremiumModalOpen] = useState(false);
-    const [isPremium, setIsPremium] = useState(false);
+const Profile = () => {
 
     const { user } = useContext(AuthContext)
-    const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
 
     const { data: biodata, error, isLoading } = useQuery({
@@ -28,33 +23,11 @@ const ViewBiodata = () => {
     if (error) {
         console.log(error)
     }
-    const handleMakePremium = () => {
-        setIsPremiumModalOpen(true);
-    };
 
-    // Confirm premium request
-    const confirmMakePremium = async () => {
-        try{
-            setIsPremiumModalOpen(false);
-        
-        const bio = {
-            name : biodata.name,
-            email: user.email,
-            bio_id: biodata.bio_id,
-        }
-
-        const result = await axiosSecure.post("/premiumBios",bio);
-        toast.success("Request is sent to admin!");
-        }catch(err){
-            console.log(err)
-            toast.error("Something Wrong During To Sent!")
-        }
-
-    };
-
+    
     return (
         <div className="p-6 bg-white shadow-md rounded-md m-8">
-            <h2 className="text-2xl font-semibold text-center mb-4">View Biodata</h2>
+            <h2 className="text-2xl font-semibold text-center mb-4">Profile</h2>
             <div className="lg:flex items-center gap-10">
                 <div className="flex flex-col items-center">
                     <img
@@ -115,42 +88,10 @@ const ViewBiodata = () => {
                 </div>
             </div>
 
-            {!isPremium ? (
-                <button
-                    onClick={handleMakePremium}
-                    className="mt-6 bg-[#e57339] text-white py-2 px-4 rounded-md w-full"
-                >
-                    Make Biodata Premium
-                </button>
-            ) : (
-                <p className="mt-6 text-green-600 font-semibold text-center">Premium Request Sent</p>
-            )}
 
-            {/* Premium Modal */}
-            {isPremiumModalOpen && (
-                <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
-                    <div className="bg-white p-6 rounded-md shadow-lg w-96">
-                        <h3 className="text-lg font-bold mb-4">Make Premium?</h3>
-                        <p>Are you sure you want to send a request to make your biodata premium?</p>
-                        <div className="flex justify-end gap-3 mt-4">
-                            <button
-                                onClick={() => setIsPremiumModalOpen(false)}
-                                className="bg-gray-300 px-4 py-2 rounded-md hover:bg-gray-400"
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                onClick={confirmMakePremium}
-                                className="bg-[#e57339] text-white px-4 py-2 rounded-md hover:bg-blue-700"
-                            >
-                                Yes, Confirm
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+           
         </div>
     );
 };
 
-export default ViewBiodata;
+export default Profile;

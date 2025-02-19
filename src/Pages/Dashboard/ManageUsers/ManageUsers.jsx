@@ -4,6 +4,7 @@ import useAxiosPublic from "../../../hooks/UseAxiosPublic";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import DataLoading from "../../../Component/DataLoading/DataLoading";
 
 const ManageUsers = () => {
   const axiosPublic = useAxiosPublic();
@@ -20,7 +21,7 @@ const ManageUsers = () => {
 
 
   if (isLoading) {
-    return <h2>Loading...</h2>
+    return <DataLoading />
   }
   
   if(biodatas){
