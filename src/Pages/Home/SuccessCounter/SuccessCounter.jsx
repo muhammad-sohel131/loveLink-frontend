@@ -17,9 +17,9 @@ export default function SuccessCounter() {
     if (error) return <h2 className="text-center text-xl text-red-500">Failed to load statistics</h2>;
 
     return (
-        <section className="mt-10 bg-[#e57339] py-10 text-white">
-            <div className="max-w-6xl mx-auto px-5">
-                <h2 className="text-3xl font-bold text-center mb-8">Our Success at a Glance</h2>
+        <section className="bg-[#e57339] py-10 text-white">
+            <div className="section-container">
+                <h2 className="text-3xl mb-6 font-bold">Our Success at a Glance</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
                     
                     {/* Total Biodata Count */}

@@ -9,7 +9,6 @@ import Contact from "../Pages/Contact/Contact";
 import Login from "../Pages/Login/Login";
 import Registration from "../Pages/Registration/Registration";
 import Dashboard from "../Layout/Dashboard";
-import UserHome from "../Pages/Dashboard/UserHome/UserHome";
 import PrivateRoute from "./PrivateRoute";
 import EditBio from "../Pages/Dashboard/EditBio/EditBio";
 import ViewBiodata from "../Pages/Dashboard/ViewBioData/ViewBioData";

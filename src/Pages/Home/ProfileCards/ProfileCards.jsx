@@ -30,9 +30,9 @@ const ProfileCards = () => {
 
 
   return (
-    <div className="section-container">
-      <div className="md:flex justify-between items-center my-10">
-        <h2 className="md:text-2xl text-lg font-bold">Premium Members</h2>
+    <div className="section-container py-10">
+      <div className="md:flex justify-between items-center">
+        <h2 className="text-3xl mb-6 font-bold">Premium Members</h2>
         <select
           className="border p-2 rounded-md"
           onChange={(e) => setSortOrder(e.target.value)}

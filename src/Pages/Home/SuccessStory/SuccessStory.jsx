@@ -17,9 +17,9 @@ export default function SuccessStory() {
     if (error) return <h2 className="text-center text-xl text-red-500">Failed to load stories</h2>;
 
     return (
-        <section className="mt-10 bg-gray-100 py-10">
-            <div className="max-w-6xl mx-auto px-5">
-                <h2 className="text-3xl font-bold text-center text-[#e57339] mb-8">Marriage Success Stories</h2>
+        <section className="py-10 section-container">
+            <div className="">
+                <h2 className="text-3xl mb-6 font-bold">Marriage Success Stories</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {successStories.map((story) => (
                         <div key={story.id} className="bg-white p-6 rounded-lg shadow-md">
