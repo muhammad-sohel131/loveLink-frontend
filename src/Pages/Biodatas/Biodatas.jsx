@@ -5,6 +5,7 @@ import useAxiosPublic from "../../hooks/UseAxiosPublic";
 import { FaFilter } from "react-icons/fa";
 import DataLoading from "../../Component/DataLoading/DataLoading";
 import "./Biodatas.css";
+import NoData from "../../Component/NoData/NoData";
 
 const Biodatas = () => {
   const location = useLocation();
@@ -76,7 +77,7 @@ const Biodatas = () => {
   return (
     <div className="section-container items-start mx-auto py-10 md:flex gap-6">
       {/* Filters Section */}
-      <div className="md:w-1/4 md:sticky h-auto top-[60px] p-4 rounded-lg shadow">
+      <div className="md:w-1/4 md:sticky h-auto top-[60px] p-4 rounded-lg shadow border border-[#e57339]">
         <h2 className="text-xl font-bold mb-4 flex gap-5 items-center text-[#e57339]">
           <FaFilter /> Filter Biodata
         </h2>
@@ -144,7 +145,7 @@ const Biodatas = () => {
       {/* Biodatas List */}
       <div className="md:w-3/4">
         {filteredBiodatas.length === 0 ? (
-          <h2>No biodatas found!</h2>
+          <NoData />
         ) : (
           <div className="grid md:mt-0 mt-10 grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredBiodatas.map((profile) => (
