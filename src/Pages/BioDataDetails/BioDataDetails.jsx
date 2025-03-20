@@ -5,30 +5,31 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { Link } from "react-router-dom";
+import SimilarBio from "../../Component/SimilarBio/SimilarBio";
+import DataLoading from '../../Component/DataLoading/DataLoading'
 
-const BiodataDetails = () => {
+const BioDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [isPremium, setPremium] = useState(true);
   const [biodata, setBiodata] = useState(null);
-  const [similarBiodatas, setSimilarBiodatas] = useState([]);
-  const [btnDisabled, setBtnbtnDisabled] = useState(true)
+  const [similarBios, setSimilarBios] = useState([]);
+  const [btnDisabled, setBtnDisabled] = useState(true)
 
   const { user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
 
-  const { data: biodataList, isLoading } = useQuery({
-    queryKey: ["biodataList"],
+  const { data: bioList, isLoading } = useQuery({
+    queryKey: ["bioList"],
     queryFn: async () => {
       const result = await axiosPublic.get(`/bios`);
       return result.data.biodatas;
     },
   });
 
-  const { data: favs } = useQuery({
-    queryKey: ["fav"],
+  const { data: favouriteBios } = useQuery({
+    queryKey: ["favouriteBios"],
     queryFn: async () => {
       const result = await axiosSecure.get(`/favourites/${user.email}`);
       return result.data;
@@ -36,7 +37,7 @@ const BiodataDetails = () => {
   });
 
   const { data: bio } = useQuery({
-    queryKey: ["bio"],
+    queryKey: ["userBio"],
     queryFn: async () => {
       const result = await axiosSecure.get(`/bios/${user.email}`);
       return result.data;
@@ -45,18 +46,18 @@ const BiodataDetails = () => {
 
   
   useEffect(() => {
-    if (biodataList) {
-      const selectedBiodata = biodataList.find(
+    if (bioList) {
+      const selectedBio = bioList.find(
         (b) => b.bio_id === parseInt(id)
       );
-      if (selectedBiodata) {
-        setBiodata(selectedBiodata);
-        setSimilarBiodatas(
-          biodataList
+      if (selectedBio) {
+        setBiodata(selectedBio);
+        setSimilarBios(
+          bioList
             .filter(
               (b) =>
-                b.gender === selectedBiodata.gender &&
-                b.bio_id !== selectedBiodata.bio_id
+                b.gender === selectedBio.gender &&
+                b.bio_id !== selectedBio.bio_id
             )
             .slice(0, 3)
         );
@@ -65,14 +66,14 @@ const BiodataDetails = () => {
     if (bio) {
       setPremium(bio.isPremium);
     }
-    if (biodata && favs && bio) {
-      const favBio = favs.filter((f) => f.bio_id === biodata.bio_id || biodata.bio_id === bio.bio_id);
-      setBtnbtnDisabled(favBio.length)
+    if (biodata && favouriteBios && bio) {
+      const favBio = favouriteBios.filter((f) => f.bio_id === biodata.bio_id || biodata.bio_id === bio.bio_id);
+      setBtnDisabled(favBio.length)
     }
-  }, [biodataList, id, bio, biodata, favs]);
+  }, [bioList, id, bio, biodata, favouriteBios]);
 
   if (isLoading || !biodata)
-    return <div className="text-center text-lg mt-20">Loading...</div>;
+    return <div className="text-center text-lg mt-20"><DataLoading /></div>;
 
   const handleAddToFavorites = async () => {
     try {
@@ -83,9 +84,9 @@ const BiodataDetails = () => {
         permanent_division: biodata.permanent_division,
         occupation: biodata.occupation,
       };
-      const result = await axiosSecure.post("/favourites", bio);
+      await axiosSecure.post("/favourites", bio);
       toast.success("Added to Favorite List!");
-      setBtnbtnDisabled(true)
+      setBtnDisabled(true)
     } catch (err) {
       console.log(err);
       toast.error("Failed to Added!");
@@ -184,52 +185,10 @@ const BiodataDetails = () => {
           </div>
         </div>
       </div>
-      <div className="mt-10">
-        <h3 className="text-3xl font-bold mb-4">Similar Biodata</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {similarBiodatas.map((profile) => (
-            <div
-              key={profile.bio_id}
-              className="bg-white shadow-md rounded-lg p-4"
-            >
-              <div className="flex flex-col gap-2">
-                <img
-                  src={profile.profile_image}
-                  alt="Profile"
-                  className="object-cover rounded-lg h-[240px]"
-                />
-                <div className="text-left">
-                  <h3 className="text-lg font-semibold mt-4">
-                    <b>ID: </b>
-                    {profile.bio_id}
-                  </h3>
-                  <p>
-                    <b>Gender: </b>
-                    {profile.gender}
-                  </p>
-                  <p>
-                    <b>Permanent Address: </b>
-                    {profile.permanent_division}
-                  </p>
-                  <p>
-                    <b>Age: </b>
-                    {profile.age}
-                  </p>
-                  <p>
-                    <b>Occupation: </b>
-                    {profile.occupation}
-                  </p>
-                </div>
-              </div>
-              <button className="mt-4 bg-[#e57339] text-white w-full py-2 rounded-md hover:bg-[#e07339] transition">
-                <Link to={`/biodata/${profile.bio_id}`}>View Profile</Link>
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* similar bio data */}
+      <SimilarBio similarBios={similarBios} />
     </div>
   );
 };
 
-export default BiodataDetails;
+export default BioDetails;
