@@ -17,7 +17,6 @@ import AdminRoute from "./AdminRoute";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 import ApprovedPremium from "../Pages/Dashboard/ApprovedPremium/ApprovedPremium";
-import BiodataDetails from "../Pages/BioDataDetails/BioDataDetails";
 import MyFavourites from "../Pages/Dashboard/MyFavourites/MyFavourites";
 import Checkout from "../Pages/Checkout/Checkout";
 import ApprovedContactRequest from "../Pages/Dashboard/ApprovedContactRequest/ApprovedContactRequest";
@@ -26,6 +25,7 @@ import GotMarried from "../Pages/Dashboard/GotMarried/GotMarried";
 import SuccessStories from "../Pages/Dashboard/SuccessStories/SuccessStories";
 import Profile from "../Pages/Dashboard/AdminProfile/Profile";
 import UserDashboard from "../Pages/Dashboard/UserDashboard/UserDashboard";
+import BioDetails from "../Pages/BioDataDetails/BioDataDetails";
 export const routes = createBrowserRouter([
     {
         path: "/",
@@ -42,7 +42,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: "biodata/:id",
-                element: <BiodataDetails />
+                element: <BioDetails />
             },
             {
                 path: "checkout/:id",
