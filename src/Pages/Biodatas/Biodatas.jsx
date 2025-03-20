@@ -164,9 +164,7 @@ const Biodatas = () => {
                     <p><b>Occupation: </b>{profile.occupation}</p>
                   </div>
                 </div>
-                <button className="mt-4 bg-[#e57339] text-white w-full py-2 rounded-md hover:bg-[#e07339] transition">
-                  <Link to={`/biodata/${profile.bio_id}`}>View Profile</Link>
-                </button>
+                <Link className="mt-4 bg-[#e57339] text-white w-full py-2 rounded-md hover:bg-[#e07339] transition block text-center" to={`/biodata/${profile.bio_id}`}>View Profile</Link>
               </div>
             ))}
           </div>
